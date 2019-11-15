@@ -1,0 +1,20 @@
+{
+  "name": "core-js",
+  "version": "1.0.0",
+  "description": "The core functionalities needed for functional final project",
+  "main": "index.js",
+  "repository": "https://github.com/fanny/functional-project.git",
+  "author": "Fanny Vieira, Marcus Vinicius",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "start": "yarn run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch './**/*.ts' --exec 'ts-node' ./resolvers/filter.ts"
+  }
+}
