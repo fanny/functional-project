@@ -2,7 +2,6 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "jsx": "react",
     "lib": ["es2017", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -11,12 +10,12 @@
     "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "resolveJsonModule": true
   },
   "typeAcquisition": {
     "enable": false
   },
-  "include": [
-    "./**/*.ts"
-  ]
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "*.md"]
 }

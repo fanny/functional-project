@@ -15,6 +15,6 @@
   "scripts": {
     "start": "yarn run build:live",
     "build": "tsc -p .",
-    "build:live": "nodemon --watch './**/*.ts' --exec 'ts-node' ./resolvers/filter.ts"
+    "build:live": "nodemon --watch './**/*.ts' --exec 'ts-node' ./index.ts"
   }
 }
