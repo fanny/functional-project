@@ -1,21 +1,21 @@
 type Transaction = {
   
-  /** Data which transaction ocurres*/
+  /** Date the transaction occures */
   dateObject: GregorianCalendar,
 
   /** Text identifier of the transaction(sets by the bank)*/
   textIdentifier: string,
 
-  /** Transaction value*/
+  /** Transaction value */
   value: number,
 
-  /** Description(extra informations) about the transaction*/
+  /** Extra informations about the transaction */
   description: string,
 
-  /** Number of the DOC*/
+  /** Number of the DOC */
   docID: string
 
-  /** The types of the transaction have */
+  /** The types of the transaction */
   transactionTypes: TransactionType[]
 }
 
