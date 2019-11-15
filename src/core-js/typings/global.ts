@@ -68,4 +68,8 @@ enum TransactionType {
   OUTROS = "Outros"
 }
 
-export default Transaction
+export {
+  Transaction,
+  GregorianCalendar,
+  TransactionType
+}

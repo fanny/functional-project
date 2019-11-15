@@ -1,5 +1,5 @@
 import * as transactions from '../../data/transactions.json'
-import Transaction from './typings/global.js'
+import { Transaction } from './typings/global.js'
 
 const teste: Transaction = transactions[0]
 
