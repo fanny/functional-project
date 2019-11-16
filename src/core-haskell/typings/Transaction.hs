@@ -10,9 +10,9 @@ import Data.Aeson
 import GHC.Generics
 
 data Transaction = Transaction {
-  dateObject :: GregorianCalendar,
+  date :: GregorianCalendar,
   textIdentifier :: String,
-  value :: Integer,
+  value :: Float,
   description :: String,
   docID :: String,
   transactionTypes :: [TransactionType]
