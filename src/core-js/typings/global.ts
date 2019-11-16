@@ -1,7 +1,7 @@
 type Transaction = {
   
   /** Date the transaction occures */
-  dateObject: GregorianCalendar,
+  date: GregorianCalendar,
 
   /** Text identifier of the transaction(sets by the bank)*/
   textIdentifier: string,
@@ -16,13 +16,13 @@ type Transaction = {
   docID: string
 
   /** The types of the transaction */
-  transactionTypes: TransactionType[]
+  transactionTypes: string[]
 }
 
 type GregorianCalendar = {
   year: number,
   month: number,
-  dayOfMonth: number
+  dayOfMonth?: number
 }
 
 enum TransactionType {
