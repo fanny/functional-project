@@ -1,6 +1,11 @@
+{-# LANGUAGE DeriveGeneric #-}
+
 module TransactionType (
   TransactionType(..)
 ) where
+
+import Data.Aeson
+import GHC.Generics
 
 data TransactionType =
   SALDO_CORRENTE |
@@ -38,7 +43,7 @@ data TransactionType =
   TARIFAS_BANCARIAS |
   OUTRAS_DESPESAS_ADMINISTRATIVAS |
   APLICACAO |
-  OUTROS
+  OUTROS deriving Generic
 
 instance Show TransactionType where
   show SALDO_CORRENTE = "Saldo Corrente"
@@ -77,3 +82,6 @@ instance Show TransactionType where
   show OUTRAS_DESPESAS_ADMINISTRATIVAS = "Outras despesas administrativas"
   show APLICACAO = "Aplicacao"
   show OUTROS = "Outros"
+
+instance FromJSON TransactionType
+instance ToJSON TransactionType
