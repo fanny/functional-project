@@ -7,7 +7,7 @@ import Data.Aeson
 import Transaction
 import Data.Maybe
 
-jsonFilePath :: FilePath
+getJsonFilePath :: FilePath
 jsonFilePath = "../../../data/transactions.json"
 
 getFile :: IO B.ByteString
