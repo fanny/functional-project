@@ -1,6 +1,6 @@
 import { TransactionType, Transaction } from "../typings/global"
 
-const ignorableTransactions = (transactionType: TransactionType) => (
+const ignorableTransactions = (transactionType: string) => (
   transactionType != TransactionType.SALDO_CORRENTE && 
   transactionType != TransactionType.APLICACAO && 
   transactionType != TransactionType.VALOR_APLICACAO

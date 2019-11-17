@@ -60,11 +60,12 @@ const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
   return median(remains)
 }
 
-const filterByPeriod = (period: GregorianCalendar) => {
-  const filteredTransactions = transactions.filter((transaction: Transaction) => {
-    return transaction.date === period
-  })
-
+const filterByPeriod = ({year, month}: GregorianCalendar) => {
+  const pass = true
+  const filteredTransactions = transactions.filter(({date: dateTransaction}: Transaction) => (
+    (month ? dateTransaction.month == month: pass) && 
+    (year ? dateTransaction.year == year: pass)
+  ))
   return filteredTransactions
 }
 

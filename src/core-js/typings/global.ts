@@ -20,8 +20,8 @@ type Transaction = {
 }
 
 type GregorianCalendar = {
-  year: number,
-  month: number,
+  year?: number,
+  month?: number,
   dayOfMonth?: number
 }
 

@@ -1,13 +1,16 @@
-const head = (values: any[]) => (values[0])
+const head = (values: any[]) => values[0]
 
-const last = (values: any[]) => (values.slice(-1))
+const last = (values: any[]) => values.slice(-1)[0]
 
 const sum = (numbers: number[]) => (
-  numbers.reduce((accumulator, current) => accumulator + current)
+  numbers.length && 
+  numbers.reduce(
+    (accumulator, current) => accumulator + current
+  )
 )
 
 const median = (numbers: number[]) => (
-  sum(numbers)/numbers.length
+  numbers.length && (sum(numbers) / numbers.length)
 )
 
 const _zipWith: any = (fn: Function, a: any[], b: any[], newArray: any[]) => {
