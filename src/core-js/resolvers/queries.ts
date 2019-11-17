@@ -1,7 +1,7 @@
 import { GregorianCalendar, Transaction } from "../typings/global"
 import * as transactions from '../../../data/transactions.json'
 import { isRevenue, isExpense, getTransactionValues, getRemains, getTotal } from './helpers'
-import { sum, zipWith, head, last, median } from 'ramda'
+import { sum, zipWith, head, last, median } from '../util'
 
 
 const getRevenueByPeriod = (period: GregorianCalendar) => {
