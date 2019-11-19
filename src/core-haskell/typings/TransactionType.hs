@@ -43,7 +43,7 @@ data TransactionType =
   TARIFAS_BANCARIAS |
   OUTRAS_DESPESAS_ADMINISTRATIVAS |
   APLICACAO |
-  OUTROS deriving Generic
+  OUTROS deriving (Eq, Generic)
 
 instance Show TransactionType where
   show SALDO_CORRENTE = "Saldo Corrente"
