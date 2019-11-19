@@ -8,7 +8,7 @@ import Transaction
 import Data.Maybe
 
 getJsonFilePath :: FilePath
-getJsonFilePath = "../../../data/transactions.json"
+getJsonFilePath = "../../data/transactions.json"
 
 getFile :: IO B.ByteString
 getFile = B.readFile getJsonFilePath
