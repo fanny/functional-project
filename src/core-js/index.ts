@@ -1,6 +1,5 @@
-import * as transactions from '../../data/transactions.json'
-import Transaction from './typings/global.js'
+import { getAvgRemainsByPeriod } from './resolvers/queries'
 
-const teste: Transaction = transactions[0]
 
-console.log(teste)
+console.log(getAvgRemainsByPeriod({year: 2017}))
+
