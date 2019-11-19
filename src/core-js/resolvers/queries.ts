@@ -6,12 +6,13 @@ import { GregorianCalendar } from '../typings/global'
 
 const getRevenueByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
-  return filterByRevenue(filteredTransactions)
 
+  return filterByRevenue(filteredTransactions)
 }
 
 const getExpensesByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
+
   return filterByExpense(filteredTransactions)
 }
 
@@ -47,16 +48,19 @@ const getMinBalanceByPeriod = (period: GregorianCalendar) => {
 
 const getAvgRevenueByPeriod = (period: GregorianCalendar) => {
   const revenues = getTransactionValues(getRevenueByPeriod(period))
+  
   return median(revenues)
 }
 
 const getAvgExpensesByPeriod = (period: GregorianCalendar) => {
   const expenses = getTransactionValues(getExpensesByPeriod(period))
+
   return median(expenses)
 }
 
 const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
   const remains = getRemainsByPeriod(period)
+
   return median(remains)
 }
 

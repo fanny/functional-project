@@ -1,4 +1,4 @@
-import { TransactionType, Transaction } from "../typings/global"
+import { TransactionType, Transaction } from '../typings/global'
 
 const ignorableTransactions = (transactionType: string) => (
   transactionType != TransactionType.SALDO_CORRENTE && 
@@ -26,12 +26,10 @@ const getTotal = (revenueValue: number, expenseValue: number) => (
   revenueValue + expenseValue
 )
 
-
 export {
   isRevenue,
   isExpense,
   getTransactionValues,
   getRemains,
   getTotal
-  
 }

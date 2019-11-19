@@ -14,6 +14,7 @@ const filterByPeriod = ({year, month}: GregorianCalendar) => {
 const filterByRevenue = (transactions: Transaction[]) => (
   transactions.filter(isRevenue)
 )
+
 const filterByExpense = (transactions: Transaction[]) => (
   transactions.filter(isExpense)
 )
