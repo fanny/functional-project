@@ -1,5 +1,5 @@
-import { getAvgExpensesByPeriod } from './resolvers/queries'
+import { getAvgRemainsByPeriod } from './resolvers/queries'
 
 
-console.log(getAvgExpensesByPeriod({year: 2016}))
+console.log(getAvgRemainsByPeriod({year: 2017}))
 

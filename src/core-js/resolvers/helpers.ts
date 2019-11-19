@@ -10,9 +10,9 @@ const isRevenue = ({ value, transactionTypes }: Transaction) => (
   value <= 0 && transactionTypes.filter(ignorableTransactions)
 ) 
 
-const isExpense = ({ value, transactionTypes }: Transaction) => {
+const isExpense = ({ value, transactionTypes }: Transaction) => (
   value > 0 && transactionTypes.filter(ignorableTransactions)
-}
+)
 
 const getTransactionValues = (transactions: Transaction[]) => (
   transactions.map(({ value }: Transaction) => value)
