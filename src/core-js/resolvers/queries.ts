@@ -1,7 +1,7 @@
-import { GregorianCalendar, Transaction } from "../typings/global"
-import * as transactions from '../../../data/transactions.json'
-import { isRevenue, isExpense, getTransactionValues, getRemains, getTotal } from './helpers'
+import { filterByPeriod, filterByExpense, filterByRevenue } from './filters'
+import { getTransactionValues, getRemains, getTotal } from './helpers'
 import { sum, zipWith, head, last, median } from '../util'
+import { GregorianCalendar } from '../typings/global'
 
 
 const getRevenueByPeriod = (period: GregorianCalendar) => {
@@ -59,22 +59,6 @@ const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
   const remains = getRemainsByPeriod(period)
   return median(remains)
 }
-
-const filterByPeriod = ({year, month}: GregorianCalendar) => {
-  const pass = true
-  const filteredTransactions = transactions.filter(({date: dateTransaction}: Transaction) => (
-    (month ? dateTransaction.month == month: pass) && 
-    (year ? dateTransaction.year == year: pass)
-  ))
-  return filteredTransactions
-}
-
-const filterByRevenue = (transactions: Transaction[]) => (
-  transactions.filter(isRevenue)
-)
-const filterByExpense = (transactions: Transaction[]) => (
-  transactions.filter(isExpense)
-)
 
 export {
   getRevenueByPeriod,
