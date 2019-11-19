@@ -1,8 +1,11 @@
+/**
+ * This code has a main purpose to serve like an API, making available all methods allowed.
+*/
+
 import { filterByPeriod, filterByExpense, filterByRevenue } from './filters'
 import { getTransactionValues, getRemains, getTotal } from './helpers'
 import { sum, zipWith, head, last, median } from '../util'
 import { GregorianCalendar } from '../typings/global'
-
 
 const getRevenueByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
@@ -48,7 +51,7 @@ const getMinBalanceByPeriod = (period: GregorianCalendar) => {
 
 const getAvgRevenueByPeriod = (period: GregorianCalendar) => {
   const revenues = getTransactionValues(getRevenueByPeriod(period))
-  
+
   return median(revenues)
 }
 

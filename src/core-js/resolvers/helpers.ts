@@ -1,3 +1,7 @@
+/**
+ * This code has a main purpose to compose other functions, for help them to complete the task. 
+*/
+
 import { TransactionType, Transaction } from '../typings/global'
 
 const ignorableTransactions = (transactionType: string) => (

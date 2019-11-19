@@ -1,3 +1,7 @@
+/**
+ * This code has a main purpose to export all filter functions.
+*/
+
 import {isRevenue, isExpense} from './helpers'
 import * as transactions from '../../../data/transactions.json'
 import {GregorianCalendar, Transaction} from '../typings/global'
