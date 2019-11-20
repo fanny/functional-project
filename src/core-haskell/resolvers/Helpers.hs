@@ -3,7 +3,8 @@ module Helpers (
   isExpense,
   isRevenueOrExpense,
   checkYear,
-  checkMonth
+  checkMonth,
+  average
 ) where
 
 import GregorianCalendar
@@ -25,3 +26,6 @@ isRevenue t = (value t) >= 0 && (isRevenueOrExpense t)
 
 isExpense :: Transaction -> Bool
 isExpense t = (value t) < 0 && (isRevenueOrExpense t)
+
+average :: [Transaction] -> Float
+average transactions = sum (map (value) transactions) / fromIntegral (length transactions)
