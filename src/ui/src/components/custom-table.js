@@ -1,6 +1,5 @@
 const template = document.createElement('template');
-template.innerHTML =
-`
+template.innerHTML = `
 <table>
 <thead>
   <tr>
@@ -26,27 +25,30 @@ template.innerHTML =
 class Table extends HTMLElement {
   constructor() {
     super()
-    
     this._shadowRoot = this.attachShadow({ mode: 'open' })
     this._shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$table = this._shadowRoot.querySelector('table')
   }
 
-  get label() {
-    return this.getAttribute('label');
+  get data() {
+    return this.getAttribute('data');
   }
 
   static get observedAttributes() {
-    return ['label']
+    return ['data']
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
+  set data(value) {
+    this.setAttribute('data', value);
+  }
+
+  attributeChangedCallback() {
     this.render()
   }
 
   render() {
-    this.$table.innerHTML += this.label
+    this.$table.querySelector('tbody').innerHTML += this.data
   }
 }
 
