@@ -5,11 +5,14 @@ module Queries (
   getExpensesByYearAndMonth,
   getRevenueValueByYearAndMonth,
   getExpenseValueByYearAndMonth,
-  getRemainsValueByYearAndMonth
+  getRemainsValueByYearAndMonth,
+  getAvgRevenuesByYear,
+  getAvgExpensesByYear
 ) where
 
 import Filters
 import Transaction
+import Helpers
 import JsonParser
 
 getTransactionsByYear :: Integer -> IO [Transaction]
@@ -21,6 +24,16 @@ getTransactionsByYearAndMonth :: Integer -> Integer -> IO [Transaction]
 getTransactionsByYearAndMonth year month = do
   transactions <- getTransactions
   return (filterByYearAndMonth year month transactions)
+
+getRevenuesByYear :: Integer -> IO [Transaction]
+getRevenuesByYear year = do
+  transactions <- (getTransactionsByYear year )
+  return (filterByRevenue transactions)
+
+getExpensesByYear :: Integer -> IO [Transaction]
+getExpensesByYear year = do
+  transactions <- (getTransactionsByYear year )
+  return (filterByExpense transactions)
 
 getRevenuesByYearAndMonth :: Integer -> Integer -> IO [Transaction]
 getRevenuesByYearAndMonth year month = do
@@ -47,3 +60,13 @@ getRemainsValueByYearAndMonth year month = do
   revenueValue <- (getRevenueValueByYearAndMonth year month)
   expenseValue <- (getExpenseValueByYearAndMonth year month)
   return (revenueValue - expenseValue)
+
+getAvgRevenuesByYear :: Integer -> IO Float
+getAvgRevenuesByYear year = do
+  revenues <- (getRevenuesByYear year)
+  return (average revenues)
+
+getAvgExpensesByYear :: Integer -> IO Float
+getAvgExpensesByYear year = do
+  expenses <- (getExpensesByYear year)
+  return ((average expenses) * (-1))
