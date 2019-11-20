@@ -1,3 +1,4 @@
+import { renderRows } from './helpers'
 const template = document.createElement('template');
 template.innerHTML = `
 <table>
@@ -7,17 +8,11 @@ template.innerHTML = `
     <th>Date</th>
     <th>Text Identifier</th>
     <th>Value</th>
+    <th>Description</th>
     <th>Types</th>
   </tr>
 </thead>
 <tbody>
-  <tr>
-    <td>1</td>
-    <td>10/08/2000</td>
-    <td>Heyy</td>
-    <td>10</td>
-    <td>SALDO CORRENTE</td>
-  </tr>
 </tbody>
 </table>
 `
@@ -48,7 +43,7 @@ class Table extends HTMLElement {
   }
 
   render() {
-    this.$table.querySelector('tbody').innerHTML += this.data
+    renderRows(this.data).forEach(row => this.$table.querySelector('tbody').innerHTML += row)
   }
 }
 

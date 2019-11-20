@@ -1,4 +1,5 @@
-import './components/custom-table.js'
+import './components/custom-table/index.js'
+import filterByPeriod from './data-fetcher/queries'
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -8,7 +9,7 @@ template.innerHTML = `
     }
   </style>
   <div>
-    <h1>Web Components with Webpack Starter Kit</h1>
+    <h1>Web Components</h1>
     <custom-table></custom-table>
   </div>
 `
@@ -20,7 +21,7 @@ class App extends HTMLElement {
     this._shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$customTable = this._shadowRoot.querySelector('custom-table')
-    this.$customTable.data = 'teste'
+    this.$customTable.data = JSON.stringify(filterByPeriod({year: 2017}))
   }
 }
 
