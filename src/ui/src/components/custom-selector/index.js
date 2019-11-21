@@ -1,7 +1,10 @@
 import { renderOptions } from './helpers'
 const template = document.createElement('template');
 template.innerHTML = `
-<select>
+<style>
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+</style>
+<select class="btn btn-primary dropdown-toggle">
 </select>
 `
 class Selector extends HTMLElement {
