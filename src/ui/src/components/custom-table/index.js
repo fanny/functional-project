@@ -1,9 +1,12 @@
+import '../custom-selector/index.js'
 import { renderRows } from './helpers'
 const template = document.createElement('template');
 template.innerHTML = `
 <table>
 <thead>
   <tr>
+    <custom-selector options=${JSON.stringify([2017, 2018, 2019])}></custom-selector>
+    <custom-selector options=${JSON.stringify([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])}></custom-selector>
     <th>DocID</th>
     <th>Date</th>
     <th>Text Identifier</th>
