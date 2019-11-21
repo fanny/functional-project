@@ -30,13 +30,8 @@ class Selector extends HTMLElement {
   }
 
   render() {
-    console.log(this.options)
     renderOptions(this.options).forEach(option => this.$selector.innerHTML += option)
   }
 }
 
 window.customElements.define('custom-selector', Selector);
-
-
-[2017, 2018, 2019]
-[0,1,2,3,4,5,6,7,8,9,10,11]
