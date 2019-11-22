@@ -1,5 +1,16 @@
 import './components/custom-table/index.js'
-import { filterByPeriod } from './data-fetcher/queries'
+import {
+  filterByPeriod,
+  getRevenuesByPeriod,
+  getExpensesByPeriod,
+  getRemainsByPeriod,
+  getTotalBalanceByPeriod,
+  getMaxBalanceByPeriod,
+  getMinBalanceByPeriod,
+  getAvgRevenuesByPeriod,
+  getAvgExpensesByPeriod,
+  getAvgRemainsByPeriod
+} from './data-fetcher/queries'
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -10,6 +21,12 @@ template.innerHTML = `
   </style>
   <div>
     <h1>Web Components</h1>
+    <span>${getTotalBalanceByPeriod({year: 2017})}</span>
+    <span>${getMaxBalanceByPeriod({year: 2017})}</span>
+    <span>${getMinBalanceByPeriod({year: 2017})}</span>
+    <span>${getAvgRevenuesByPeriod({year: 2017})}</span>
+    <span>${getAvgExpensesByPeriod({year: 2017})}</span>
+    <span>${getAvgRemainsByPeriod({year: 2017})}</span>
     <custom-table></custom-table>
   </div>
 `
