@@ -1,8 +1,7 @@
-import './components/custom-table/index.js'
 import {
   filterByPeriod,
-  getRevenuesByPeriod,
-  getExpensesByPeriod,
+  getRevenueByPeriod,
+  getExpenseByPeriod,
   getRemainsByPeriod,
   getTotalBalanceByPeriod,
   getMaxBalanceByPeriod,
@@ -21,13 +20,16 @@ template.innerHTML = `
   </style>
   <div>
     <h1>Web Components</h1>
+    <span>${getRevenueByPeriod({year: 2017})}</span>
+    <span>${getExpenseByPeriod({year: 2017})}</span>
+    <span>${getRemainsByPeriod({year: 2017})}</span>
+    <span>${getTotalBalanceByPeriod({year: 2017})}</span>
     <span>${getTotalBalanceByPeriod({year: 2017})}</span>
     <span>${getMaxBalanceByPeriod({year: 2017})}</span>
     <span>${getMinBalanceByPeriod({year: 2017})}</span>
     <span>${getAvgRevenuesByPeriod({year: 2017})}</span>
     <span>${getAvgExpensesByPeriod({year: 2017})}</span>
     <span>${getAvgRemainsByPeriod({year: 2017})}</span>
-    <custom-table></custom-table>
   </div>
 `
 
