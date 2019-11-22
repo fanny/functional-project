@@ -37,7 +37,7 @@ class Table extends HTMLElement {
     this._shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$table = this._shadowRoot.querySelector('table')
-    this.$selector = this._shadowRoot.querySelector('selector')
+    this.$selector = this._shadowRoot.querySelector('custom-selector')
   }
 
   get data() {
@@ -58,6 +58,7 @@ class Table extends HTMLElement {
 
   render() {
     renderRows(this.data).forEach(row => this.$table.querySelector('tbody').innerHTML += row)
+    console.log(this.$selector.option)
   }
 }
 

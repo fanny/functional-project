@@ -1,8 +1,26 @@
-import {filterByPeriod as filterByPeriodBase} from '../../../core-js/resolvers/queries.ts'
+import {
+ filterByPeriod,
+  getRevenuesByPeriod,
+  getExpensesByPeriod,
+  getRemainsByPeriod,
+  getTotalBalanceByPeriod,
+  getMaxBalanceByPeriod,
+  getMinBalanceByPeriod,
+  getAvgRevenuesByPeriod,
+  getAvgExpensesByPeriod,
+  getAvgRemainsByPeriod,
+} from '../../../core-js'
 
-const filterByPeriod = () => {
-  console.log(filterByPeriodBase({year: 2017}).slice(0, 10))
-  return filterByPeriodBase({year: 2017}).slice(0, 10)
+
+export {
+  filterByPeriod,
+  getRevenuesByPeriod,
+  getExpensesByPeriod,
+  getRemainsByPeriod,
+  getTotalBalanceByPeriod,
+  getMaxBalanceByPeriod,
+  getMinBalanceByPeriod,
+  getAvgRevenuesByPeriod,
+  getAvgExpensesByPeriod,
+  getAvgRemainsByPeriod
 }
-
-export default filterByPeriod

@@ -8,10 +8,12 @@ import {GregorianCalendar, Transaction} from '../typings/global'
 
 const filterByPeriod = ({year, month}: GregorianCalendar) => {
   const pass = true
-  const filteredTransactions = transactions.filter(({date: dateTransaction}: Transaction) => (
-    (month ? dateTransaction.month == month: pass) && 
-    (year ? dateTransaction.year == year: pass)
-  ))
+  const filteredTransactions = transactions.filter(
+    ({date: dateTransaction}: Transaction) => (
+      (month ? dateTransaction.month == month: pass) && 
+      (year ? dateTransaction.year == year: pass)
+    )
+  )
   return filteredTransactions
 }
 

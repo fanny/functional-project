@@ -14,6 +14,7 @@ class Selector extends HTMLElement {
     this._shadowRoot.appendChild(template.content.cloneNode(true))
 
     this.$selector = this._shadowRoot.querySelector('select')
+    this.option = '2017'
   }
 
   get options() {
@@ -21,7 +22,14 @@ class Selector extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['options']
+    return ['option', 'options']
+  }
+
+  get option() {
+    return this.getAttribute('option');
+  }
+  set option(value) {
+    this.setAttribute('option', value);
   }
 
   set options(value) {
@@ -34,6 +42,14 @@ class Selector extends HTMLElement {
 
   render() {
     renderOptions(this.options).forEach(option => this.$selector.innerHTML += option)
+    this.$options = this.$selector.querySelectorAll('option').forEach($option => (
+      $option.addEventListener('click', () => {
+        this.option = $option.value;
+        this.render();
+      })
+      
+    )
+    )
   }
 }
 

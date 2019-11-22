@@ -1,5 +1,5 @@
 import './components/custom-table/index.js'
-import filterByPeriod from './data-fetcher/queries'
+import { filterByPeriod } from './data-fetcher/queries'
 
 const template = document.createElement('template');
 template.innerHTML = `
