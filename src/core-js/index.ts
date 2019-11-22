@@ -1,7 +1,7 @@
 import {
    filterByPeriod,
-   getRevenuesByPeriod,
-   getExpensesByPeriod,
+   getRevenueByPeriod,
+   getExpenseByPeriod,
    getRemainsByPeriod,
    getTotalBalanceByPeriod,
    getMaxBalanceByPeriod,
@@ -14,8 +14,8 @@ import {
  
  export {
    filterByPeriod,
-   getRevenuesByPeriod,
-   getExpensesByPeriod,
+   getRevenueByPeriod,
+   getExpenseByPeriod,
    getRemainsByPeriod,
    getTotalBalanceByPeriod,
    getMaxBalanceByPeriod,

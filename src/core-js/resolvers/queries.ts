@@ -51,7 +51,7 @@ const getExpensesValues = (period: GregorianCalendar) => {
 }
 
 const getExpenseByPeriod = (period: GregorianCalendar) => {
-  return sum(getExpensesValues(period))
+  return sum(getExpensesValues(period))*(-1)
 }
 
 const getRemainByPeriod = (period: GregorianCalendar) => {
