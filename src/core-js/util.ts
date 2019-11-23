@@ -35,11 +35,16 @@ const groupBy = (valueFn: any, keyFn: any, list: any[])=> {
 }
 
 
+const flatten = (list:any) => {
+  return list.reduce((acc:any, val:any) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), [])
+}
+
 export {
   head,
   last,
   sum,
   average,
   zipWith,
-  groupBy
+  groupBy,
+  flatten
 }

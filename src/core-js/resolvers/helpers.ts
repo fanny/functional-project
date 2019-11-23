@@ -30,10 +30,15 @@ const getTotal = (revenueValue: number, expenseValue: number) => (
   revenueValue + expenseValue
 )
 
+const groupMonths = (acc:any, { value }:Transaction) => acc.concat(value)
+const getMonth = ({ date: { month }}: Transaction) => month
+
 export {
   isRevenue,
   isExpense,
   getTransactionsValues,
   getRemains,
-  getTotal
+  getTotal,
+  groupMonths,
+  getMonth
 }

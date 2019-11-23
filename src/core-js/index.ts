@@ -1,11 +1,12 @@
-import { groupBy } from './util'
-import { Transaction } from './typings/global';
-import { filterByPeriod } from './resolvers/queries'
+/*import { groupBy } from './util'
+import { Transaction } from './typings/global';*/
+import { getRemainByPeriod } from './resolvers/queries'
 
-
+/*
 const groupMonths = (acc:any, { value }:Transaction) => acc.concat(value)
-const toMonth = ({ date: { month }}: Transaction) => month
+const getMonth = ({ date: { month }}: Transaction) => month
 
-groupBy(groupMonths, toMonth, filterByPeriod({year: 2017}))
+const a = groupBy(groupMonths, getMonth, filterByPeriod({year: 2017}))*/
+console.log(getRemainByPeriod({year: 2017}))
 
 
