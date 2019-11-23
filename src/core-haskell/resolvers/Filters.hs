@@ -12,7 +12,7 @@ filterByYear :: Integer -> [Transaction] -> [Transaction]
 filterByYear year transactions = filter (checkYear year) transactions
 
 filterByYearAndMonth :: Integer -> Integer -> [Transaction] -> [Transaction]
-filterByYearAndMonth year month transactions = filter (checkMonth month) transactions
+filterByYearAndMonth year month transactions = filter (checkMonth month) (filterByYear year transactions)
 
 filterByRevenue :: [Transaction] -> [Transaction]
 filterByRevenue transactions = filter (isRevenue) transactions
