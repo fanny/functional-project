@@ -3,8 +3,8 @@
 */
 
 import { filterByPeriod, filterByExpense, filterByRevenue } from './filters'
-import { getTransactionsValues, getRemains, getTotal } from './helpers'
-import { sum, zipWith, head, last, median } from '../util'
+import { getTransactionsValues, getRemains, getTotal, getMonth, concatValues, getDay } from './helpers'
+import { sum, zipWith, head, last, average, groupBy } from '../util'
 import { GregorianCalendar } from '../typings/global'
 
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
@@ -20,31 +20,35 @@ const getExpensesByPeriod = (period: GregorianCalendar) => {
 }
 
 const getRemainsByPeriod = (period: GregorianCalendar) => {
-  const revenues = getTransactionsValues(getRevenuesByPeriod(period))
-  const expenses = getTransactionsValues(getExpensesByPeriod(period))
+  const revenues = groupBy(concatValues, getMonth, getRevenuesByPeriod(period))
+  const expenses = groupBy(concatValues, getMonth, getExpensesByPeriod(period))
 
   return zipWith(getRemains, revenues, expenses)
 }
 
-const getTotalBalanceByPeriod = (period: GregorianCalendar) => {
-  const revenues = getTransactionsValues(getRevenuesByPeriod(period))
-  const expenses = getTransactionsValues(getExpensesByPeriod(period))
+const getRemainByPeriod = (period: GregorianCalendar) => {
+  return sum(getRemainsByPeriod(period))
+}
 
-  return sum(zipWith(getTotal, revenues, expenses))
+const getTotalBalancesByPeriod = (period: GregorianCalendar) => {
+  const revenues = groupBy(concatValues, getDay, getRevenuesByPeriod(period))
+  const expenses = groupBy(concatValues, getDay, getRevenuesByPeriod(period))
+
+  return zipWith(getTotal, revenues, expenses)
+}
+
+const getTotalBalanceByPeriod = (period: GregorianCalendar) => {
+  return sum(getTotalBalancesByPeriod(period))
 }
 
 const getMaxBalanceByPeriod = (period: GregorianCalendar) => {
-  const revenues = getTransactionsValues(getRevenuesByPeriod(period))
-  const expenses = getTransactionsValues(getExpensesByPeriod(period))
-  const sortedBalance = zipWith(getTotal, revenues, expenses).sort()
+  const sortedBalance = getTotalBalancesByPeriod(period).sort()
 
   return last(sortedBalance)
 }
 
 const getMinBalanceByPeriod = (period: GregorianCalendar) => {
-  const revenues = getTransactionsValues(getRevenuesByPeriod(period))
-  const expenses = getTransactionsValues(getExpensesByPeriod(period))
-  const sortedBalance = zipWith(getTotal, revenues, expenses).sort()
+  const sortedBalance = getTotalBalancesByPeriod(period).sort()
 
   return head(sortedBalance)
 }
@@ -52,30 +56,38 @@ const getMinBalanceByPeriod = (period: GregorianCalendar) => {
 const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {
   const revenues = getTransactionsValues(getRevenuesByPeriod(period))
 
-  return median(revenues)
+  return average(revenues)
 }
 
 const getAvgExpensesByPeriod = (period: GregorianCalendar) => {
   const expenses = getTransactionsValues(getExpensesByPeriod(period))
 
-  return median(expenses)
+  return average(expenses)
 }
 
 const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
   const remains = getRemainsByPeriod(period)
 
-  return median(remains)
+  return average(remains)
+}
+
+const getCashFlow = (period: GregorianCalendar) => {
+  const transactionsByDay = groupBy(concatValues, getDay, getRevenuesByPeriod(period))
+  const days = Object.keys(transactionsByDay)
+
+  return days.map(day => [day, sum(transactionsByDay[day])])
 }
 
 export {
   getRevenuesByPeriod,
   getExpensesByPeriod,
-  getRemainsByPeriod,
+  getRemainByPeriod,
   getTotalBalanceByPeriod,
   getMaxBalanceByPeriod,
   getMinBalanceByPeriod,
   getAvgRevenuesByPeriod,
   getAvgExpensesByPeriod,
   getAvgRemainsByPeriod,
+  getCashFlow,
   filterByPeriod
 }

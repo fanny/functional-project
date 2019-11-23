@@ -23,17 +23,24 @@ const getTransactionsValues = (transactions: Transaction[]) => (
 )
 
 const getRemains = (revenueValue: number, expenseValue: number) => (
-  revenueValue - expenseValue
+  revenueValue - (expenseValue * (-1))
 )
 
 const getTotal = (revenueValue: number, expenseValue: number) => (
   revenueValue + expenseValue
 )
 
+const concatValues = (acc:any, { value }:Transaction) => acc.concat(value)
+const getMonth = ({ date: { month }}: Transaction) => month
+const getDay = ({ date: { dayOfMonth }}: Transaction) => dayOfMonth
+
 export {
   isRevenue,
   isExpense,
   getTransactionsValues,
   getRemains,
-  getTotal
+  getTotal,
+  concatValues,
+  getMonth,
+  getDay
 }

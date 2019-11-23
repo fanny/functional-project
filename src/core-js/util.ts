@@ -9,27 +9,35 @@ const sum = (numbers: number[]) => (
   )
 )
 
-const median = (numbers: number[]) => (
+const average = (numbers: number[]) => (
   numbers.length && (sum(numbers) / numbers.length)
 )
 
-const _zipWith: any = (fn: Function, a: any[], b: any[], newArray: any[]) => {
-  const index = newArray.length;
-  if(a.length == index || b.length == index)
-    return newArray
-  
-  newArray.push(fn(a[index], b[index]))
-  return _zipWith(fn, a, b, newArray)
+const zipWith = (fn: Function, a: any, b: any) => {
+  const keys = new Set(Object.keys(a).concat(Object.keys(b)))
+  const listKeys = Array.from(keys)
+  return listKeys.map(key => fn(sum(a[key]), sum(b[key])))
 }
 
-const zipWith = (fn: Function, a: any[], b: any[]) => {
-  return _zipWith(fn, a, b, []);
+const groupBy = (valueFn: any, keyFn: any, list: any[])=> {
+  return list.reduce((acc, current) => {
+    const key = keyFn(current)
+    acc[key] = valueFn(acc.hasOwnProperty(key)? acc[key]: [], current)
+    return acc
+  }, {})
+}
+
+
+const flatten = (list:any) => {
+  return list.reduce((acc:any, val:any) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), [])
 }
 
 export {
   head,
   last,
   sum,
-  median,
-  zipWith
+  average,
+  zipWith,
+  groupBy,
+  flatten
 }
