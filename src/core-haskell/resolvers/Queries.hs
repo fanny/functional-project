@@ -10,7 +10,8 @@ module Queries (
   getAvgExpensesByYear,
   groupTransactionsByDay,
   getMaxBalance,
-  getMinBalance
+  getMinBalance,
+  getCashFlow
 ) where
 
 import Filters
@@ -19,7 +20,6 @@ import Helpers
 import JsonParser
 import GregorianCalendar
 import Data.List
-import Data.Function
 
 getTransactionsByYear :: Integer -> IO [Transaction]
 getTransactionsByYear year = do
@@ -88,3 +88,14 @@ getMinBalance :: Integer -> Integer -> IO Float
 getMinBalance year month = do
   transactions <- (getTransactionsByYearAndMonth year month)
   return (minimum (getDaysBalances transactions))
+
+-- Retorna o fluxo de caixa de determinado mês e ano. 
+-- O fluxo de caixa é do uma lista contendo pares (dia, saldoFinalDoDia). 
+getCashFlow :: Integer -> Integer -> IO [(Integer, Float)]
+getCashFlow year month = do
+  transactions <- (getTransactionsByYearAndMonth year month)
+  return (getCashFlow' (groupTransactionsByDay transactions))
+
+getCashFlow' :: [[Transaction]] -> [(Integer, Float)]
+getCashFlow' [] = []
+getCashFlow' (x:xs) = [((getDay (x!!0)), (getBalance x))] ++ (getCashFlow' xs)
