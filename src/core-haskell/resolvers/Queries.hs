@@ -77,12 +77,17 @@ getRemainsValueByYearAndMonth year month = do
 getAvgRevenuesByYear :: Integer -> IO Float
 getAvgRevenuesByYear year = do
   revenues <- (getRevenuesByYear year)
-  return (mean revenues)
+  return (mean (map (value) revenues))
 
 getAvgExpensesByYear :: Integer -> IO Float
 getAvgExpensesByYear year = do
   expenses <- (getExpensesByYear year)
-  return ((mean expenses) * (-1))
+  return ((mean (map (value) expenses)) * (-1))
+
+getAvgRemainsByYear ::Integer -> IO Float
+getAvgRemainsByYear year = do
+  transactions <- (getTransactionsByYear year)
+  return (mean (getMonthsRemains (filter isRevenueOrExpense transactions)))
 
 -- Retorna o saldo final para um dado ano e mês.
 getFinalBalance :: Integer -> Integer -> IO Float

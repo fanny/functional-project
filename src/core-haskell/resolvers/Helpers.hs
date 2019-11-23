@@ -10,7 +10,9 @@ module Helpers (
   getDaysRemains,
   getRemains,
   getDaysBalances,
-  getInitialBalance
+  getInitialBalance,
+  groupTransactionsByMonth,
+  getMonthsRemains
 ) where
 
 import GregorianCalendar
@@ -34,12 +36,24 @@ isRevenue t = (value t) >= 0 && (isRevenueOrExpense t)
 isExpense :: Transaction -> Bool
 isExpense t = (value t) < 0 && (isRevenueOrExpense t)
 
-mean :: [Transaction] -> Float
-mean transactions = sum (map (value) transactions) / fromIntegral (length transactions)
+mean :: [Float] -> Float
+mean values = sum (values) / fromIntegral (length values)
+
+-- Agrupa a lista de transações por dia.
+groupTransactionsByDay :: [Transaction] -> [[Transaction]]
+groupTransactionsByDay transactions = (groupBy ((==) `on` getDay) transactions)
+
+-- Agrupa a lista de transações por mês.
+groupTransactionsByMonth :: [Transaction] -> [[Transaction]]
+groupTransactionsByMonth transactions = (groupBy ((==) `on` getMonth) transactions)
 
 -- Retorna uma lista contendo a sobra para cada dia da lista de transações.
 getDaysRemains :: [Transaction] -> [Float]
 getDaysRemains transactions = map (getRemains) (groupTransactionsByDay transactions)
+
+-- Retorna uma lista contendo a sobra para cada dia da lista de transações.
+getMonthsRemains :: [Transaction] -> [Float]
+getMonthsRemains transactions = map (getRemains) (groupTransactionsByMonth transactions)
 
 -- Retorna a sobra para a lista de transações.
 getRemains :: [Transaction] -> Float
@@ -54,10 +68,10 @@ getDaysBalances revenuesAndExpenses initialBalance =
 getInitialBalance :: [Transaction] -> Float
 getInitialBalance transactions = value (transactions !! 0)
 
--- Agrupa a lista de transações por dia.
-groupTransactionsByDay :: [Transaction] -> [[Transaction]]
-groupTransactionsByDay transactions = (groupBy ((==) `on` getDay) transactions)
-
 -- Retorna o dia do mês de uma transação.
 getDay :: Transaction -> Integer
 getDay t = dayOfMonth (date t)
+
+-- Retorn o mês de uma transação
+getMonth :: Transaction -> Integer
+getMonth t = month (date t)
