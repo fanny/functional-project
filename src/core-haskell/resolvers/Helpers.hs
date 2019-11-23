@@ -7,8 +7,10 @@ module Helpers (
   mean,
   getDay,
   groupTransactionsByDay,
+  getDaysRemains,
+  getRemains,
   getDaysBalances,
-  getBalance
+  getInitialBalance
 ) where
 
 import GregorianCalendar
@@ -35,13 +37,22 @@ isExpense t = (value t) < 0 && (isRevenueOrExpense t)
 mean :: [Transaction] -> Float
 mean transactions = sum (map (value) transactions) / fromIntegral (length transactions)
 
--- Retorna uma lista contendo o saldo para cada dia da lista de transações.
-getDaysBalances :: [Transaction] -> [Float]
-getDaysBalances transactions = map (getBalance) (groupTransactionsByDay transactions)
+-- Retorna uma lista contendo a sobra para cada dia da lista de transações.
+getDaysRemains :: [Transaction] -> [Float]
+getDaysRemains transactions = map (getRemains) (groupTransactionsByDay transactions)
 
--- Retorna o saldo para a lista de transações.
-getBalance :: [Transaction] -> Float
-getBalance transactions = sum (map (value) transactions)
+-- Retorna a sobra para a lista de transações.
+getRemains :: [Transaction] -> Float
+getRemains transactions = sum (map (value) transactions)
+
+-- Retorna uma lista contendo o saldo para cada dia da lista de transações.
+getDaysBalances :: [Transaction] -> Float -> [Float]
+getDaysBalances revenuesAndExpenses initialBalance = 
+  snd (mapAccumL (\x y -> (x+y,x+y)) initialBalance (getDaysRemains revenuesAndExpenses))
+
+-- Retorna o saldo inicial de uma lista de transaçãoes.
+getInitialBalance :: [Transaction] -> Float
+getInitialBalance transactions = value (transactions !! 0)
 
 -- Agrupa a lista de transações por dia.
 groupTransactionsByDay :: [Transaction] -> [[Transaction]]
