@@ -11,6 +11,8 @@ module Queries (
   groupTransactionsByDay,
   getMaxBalance,
   getMinBalance,
+  getFinalBalance,
+  getDaysBalances,
   getCashFlow
 ) where
 
@@ -30,6 +32,11 @@ getTransactionsByYearAndMonth :: Integer -> Integer -> IO [Transaction]
 getTransactionsByYearAndMonth year month = do
   transactions <- getTransactions
   return (filterByYearAndMonth year month transactions)
+
+getRevenuesAndExpenses :: Integer -> Integer -> IO [Transaction]
+getRevenuesAndExpenses year month = do
+  transactions <- (getTransactionsByYearAndMonth year month)
+  return (filter (isRevenueOrExpense) transactions)
 
 getRevenuesByYear :: Integer -> IO [Transaction]
 getRevenuesByYear year = do
@@ -77,25 +84,33 @@ getAvgExpensesByYear year = do
   expenses <- (getExpensesByYear year)
   return ((mean expenses) * (-1))
 
+-- Retorna o saldo final para um dado ano e mês.
+getFinalBalance :: Integer -> Integer -> IO Float
+getFinalBalance year month = do
+  transactions <- (getTransactionsByYearAndMonth year month)
+  remainer <- (getRemainsValueByYearAndMonth year month)
+  return ((value (transactions !! 0)) + remainer)
+
 -- Retorna o maior saldo para um dado ano e mês.
 getMaxBalance :: Integer -> Integer -> IO Float
 getMaxBalance year month = do
   transactions <- (getTransactionsByYearAndMonth year month)
-  return (maximum (getDaysBalances transactions))
+  revenuesAndExpenses <- (getRevenuesAndExpenses year month)
+  return (maximum (getDaysBalances revenuesAndExpenses (getInitialBalance transactions)))
 
 -- Retorna o menor saldo para um dado ano e mês.
 getMinBalance :: Integer -> Integer -> IO Float 
 getMinBalance year month = do
   transactions <- (getTransactionsByYearAndMonth year month)
-  return (minimum (getDaysBalances transactions))
+  revenuesAndExpenses <- (getRevenuesAndExpenses year month)
+  return (minimum (getDaysBalances revenuesAndExpenses (getInitialBalance transactions)))
 
 -- Retorna o fluxo de caixa de determinado mês e ano. 
 -- O fluxo de caixa é do uma lista contendo pares (dia, saldoFinalDoDia). 
 getCashFlow :: Integer -> Integer -> IO [(Integer, Float)]
 getCashFlow year month = do
+  revenuesAndExpenses <- (getRevenuesAndExpenses year month)
   transactions <- (getTransactionsByYearAndMonth year month)
-  return (getCashFlow' (groupTransactionsByDay transactions))
+  return (snd (mapAccumL (\x y -> (((getRemains y) + x), (getDay (y!!0), (getRemains y) + x))) (getInitialBalance transactions) (groupTransactionsByDay revenuesAndExpenses)))
 
-getCashFlow' :: [[Transaction]] -> [(Integer, Float)]
-getCashFlow' [] = []
-getCashFlow' (x:xs) = [((getDay (x!!0)), (getBalance x))] ++ (getCashFlow' xs)
+  
