@@ -4,13 +4,18 @@ module Helpers (
   isRevenueOrExpense,
   checkYear,
   checkMonth,
-  mean
+  mean,
+  getDay,
+  groupTransactionsByDay,
+  getDaysBalances,
+  getBalance
 ) where
 
 import GregorianCalendar
 import Transaction
 import TransactionType
 import Data.List
+import Data.Function
 
 checkYear :: Integer -> Transaction -> Bool
 checkYear y t = year (date t) == y
