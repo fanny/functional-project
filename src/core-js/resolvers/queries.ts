@@ -4,7 +4,7 @@
 
 import { filterByPeriod, filterByExpense, filterByRevenue } from './filters'
 import { getTransactionsValues, getRemains, getTotal, getMonth, groupMonths} from './helpers'
-import { sum, zipWith, head, last, average, groupBy, flatten } from '../util'
+import { sum, zipWith, head, last, average, groupBy } from '../util'
 import { GregorianCalendar } from '../typings/global'
 
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
@@ -20,11 +20,8 @@ const getExpensesByPeriod = (period: GregorianCalendar) => {
 }
 
 const getRemainsByPeriod = (period: GregorianCalendar) => {
-  const revenuesByMonth = groupBy(groupMonths, getMonth, getRevenuesByPeriod(period))
-  const expensesByMonth = groupBy(groupMonths, getMonth, getExpensesByPeriod(period))
-
-  const revenues = flatten(Object.values(revenuesByMonth))
-  const expenses = flatten(Object.values(expensesByMonth))
+  const revenues = groupBy(groupMonths, getMonth, getRevenuesByPeriod(period))
+  const expenses = groupBy(groupMonths, getMonth, getExpensesByPeriod(period))
 
   return zipWith(getRemains, revenues, expenses)
 }

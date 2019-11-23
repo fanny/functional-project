@@ -23,7 +23,7 @@ const getTransactionsValues = (transactions: Transaction[]) => (
 )
 
 const getRemains = (revenueValue: number, expenseValue: number) => (
-  revenueValue - expenseValue
+  revenueValue - (expenseValue * (-1))
 )
 
 const getTotal = (revenueValue: number, expenseValue: number) => (

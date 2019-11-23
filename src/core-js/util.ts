@@ -13,17 +13,11 @@ const average = (numbers: number[]) => (
   numbers.length && (sum(numbers) / numbers.length)
 )
 
-const _zipWith: any = (fn: Function, a: any[], b: any[], newArray: any[]) => {
-  const index = newArray.length;
-  if(a.length == index || b.length == index)
-    return newArray
-  
-  newArray.push(fn(a[index], b[index]))
-  return _zipWith(fn, a, b, newArray)
-}
 
-const zipWith = (fn: Function, a: any[], b: any[]) => {
-  return _zipWith(fn, a, b, []);
+const zipWith = (fn: Function, a: any, b: any) => {
+  const keys = new Set(Object.keys(a).concat(Object.keys(b)))
+  const listKeys = Array.from(keys)
+  return listKeys.map(key => fn(sum(a[key]), sum(b[key])))
 }
 
 const groupBy = (valueFn: any, keyFn: any, list: any[])=> {
