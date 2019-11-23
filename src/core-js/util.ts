@@ -13,7 +13,6 @@ const average = (numbers: number[]) => (
   numbers.length && (sum(numbers) / numbers.length)
 )
 
-
 const zipWith = (fn: Function, a: any, b: any) => {
   const keys = new Set(Object.keys(a).concat(Object.keys(b)))
   const listKeys = Array.from(keys)
