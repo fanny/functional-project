@@ -26,10 +26,20 @@ const zipWith = (fn: Function, a: any[], b: any[]) => {
   return _zipWith(fn, a, b, []);
 }
 
+const groupBy = (valueFn: any, keyFn: any, list: any[])=> {
+  return list.reduce((acc, current) => {
+    const key = keyFn(current)
+    acc[key] = valueFn(acc.hasOwnProperty(key)? acc[key]: [], current)
+    return acc
+  }, {})
+}
+
+
 export {
   head,
   last,
   sum,
   average,
-  zipWith
+  zipWith,
+  groupBy
 }
