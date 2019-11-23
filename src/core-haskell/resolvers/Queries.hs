@@ -58,53 +58,53 @@ getExpensesByYearAndMonth year month = do
   transactions <- (getTransactionsByYearAndMonth year month)
   return (filterByExpense transactions)
 
-getRevenueValueByYearAndMonth :: Integer -> Integer -> IO Float
+getRevenueValueByYearAndMonth :: Integer -> Integer -> IO Double
 getRevenueValueByYearAndMonth year month = do
   transactions <- (getRevenuesByYearAndMonth year month)
   return (sum (map (value) transactions))
 
-getExpenseValueByYearAndMonth :: Integer -> Integer -> IO Float
+getExpenseValueByYearAndMonth :: Integer -> Integer -> IO Double
 getExpenseValueByYearAndMonth year month = do
   transactions <- (getExpensesByYearAndMonth year month)
   return ((sum (map (value) transactions)) * (-1))
 
-getRemainsValueByYearAndMonth :: Integer -> Integer -> IO Float
+getRemainsValueByYearAndMonth :: Integer -> Integer -> IO Double
 getRemainsValueByYearAndMonth year month = do
   revenueValue <- (getRevenueValueByYearAndMonth year month)
   expenseValue <- (getExpenseValueByYearAndMonth year month)
   return (revenueValue - expenseValue)
 
-getAvgRevenuesByYear :: Integer -> IO Float
+getAvgRevenuesByYear :: Integer -> IO Double
 getAvgRevenuesByYear year = do
   revenues <- (getRevenuesByYear year)
   return (mean (map (value) revenues))
 
-getAvgExpensesByYear :: Integer -> IO Float
+getAvgExpensesByYear :: Integer -> IO Double
 getAvgExpensesByYear year = do
   expenses <- (getExpensesByYear year)
   return ((mean (map (value) expenses)) * (-1))
 
-getAvgRemainsByYear ::Integer -> IO Float
+getAvgRemainsByYear ::Integer -> IO Double
 getAvgRemainsByYear year = do
   transactions <- (getTransactionsByYear year)
   return (mean (getMonthsRemains (filter isRevenueOrExpense transactions)))
 
 -- Retorna o saldo final para um dado ano e mês.
-getFinalBalance :: Integer -> Integer -> IO Float
+getFinalBalance :: Integer -> Integer -> IO Double
 getFinalBalance year month = do
   transactions <- (getTransactionsByYearAndMonth year month)
   remainer <- (getRemainsValueByYearAndMonth year month)
   return ((value (transactions !! 0)) + remainer)
 
 -- Retorna o maior saldo para um dado ano e mês.
-getMaxBalance :: Integer -> Integer -> IO Float
+getMaxBalance :: Integer -> Integer -> IO Double
 getMaxBalance year month = do
   transactions <- (getTransactionsByYearAndMonth year month)
   revenuesAndExpenses <- (getRevenuesAndExpenses year month)
   return (maximum (getDaysBalances revenuesAndExpenses (getInitialBalance transactions)))
 
 -- Retorna o menor saldo para um dado ano e mês.
-getMinBalance :: Integer -> Integer -> IO Float 
+getMinBalance :: Integer -> Integer -> IO Double 
 getMinBalance year month = do
   transactions <- (getTransactionsByYearAndMonth year month)
   revenuesAndExpenses <- (getRevenuesAndExpenses year month)
@@ -112,7 +112,7 @@ getMinBalance year month = do
 
 -- Retorna o fluxo de caixa de determinado mês e ano. 
 -- O fluxo de caixa é do uma lista contendo pares (dia, saldoFinalDoDia). 
-getCashFlow :: Integer -> Integer -> IO [(Integer, Float)]
+getCashFlow :: Integer -> Integer -> IO [(Integer, Double)]
 getCashFlow year month = do
   revenuesAndExpenses <- (getRevenuesAndExpenses year month)
   transactions <- (getTransactionsByYearAndMonth year month)
