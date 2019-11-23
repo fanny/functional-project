@@ -7,13 +7,19 @@ module Queries (
   getExpenseValueByYearAndMonth,
   getRemainsValueByYearAndMonth,
   getAvgRevenuesByYear,
-  getAvgExpensesByYear
+  getAvgExpensesByYear,
+  groupTransactionsByDay,
+  getMaxBalance,
+  getMinBalance
 ) where
 
 import Filters
 import Transaction
 import Helpers
 import JsonParser
+import GregorianCalendar
+import Data.List
+import Data.Function
 
 getTransactionsByYear :: Integer -> IO [Transaction]
 getTransactionsByYear year = do
@@ -64,9 +70,21 @@ getRemainsValueByYearAndMonth year month = do
 getAvgRevenuesByYear :: Integer -> IO Float
 getAvgRevenuesByYear year = do
   revenues <- (getRevenuesByYear year)
-  return (average revenues)
+  return (mean revenues)
 
 getAvgExpensesByYear :: Integer -> IO Float
 getAvgExpensesByYear year = do
   expenses <- (getExpensesByYear year)
-  return ((average expenses) * (-1))
+  return ((mean expenses) * (-1))
+
+-- Retorna o maior saldo para um dado ano e mês.
+getMaxBalance :: Integer -> Integer -> IO Float
+getMaxBalance year month = do
+  transactions <- (getTransactionsByYearAndMonth year month)
+  return (maximum (getDaysBalances transactions))
+
+-- Retorna o menor saldo para um dado ano e mês.
+getMinBalance :: Integer -> Integer -> IO Float 
+getMinBalance year month = do
+  transactions <- (getTransactionsByYearAndMonth year month)
+  return (minimum (getDaysBalances transactions))
