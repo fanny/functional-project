@@ -4,7 +4,7 @@
 
 import { filterByPeriod, filterByExpense, filterByRevenue } from './filters'
 import { getTransactionsValues, getRemains, getTotal } from './helpers'
-import { sum, zipWith, head, last, median } from '../util'
+import { sum, zipWith, head, last, average } from '../util'
 import { GregorianCalendar } from '../typings/global'
 
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
@@ -52,19 +52,19 @@ const getMinBalanceByPeriod = (period: GregorianCalendar) => {
 const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {
   const revenues = getTransactionsValues(getRevenuesByPeriod(period))
 
-  return median(revenues)
+  return average(revenues)
 }
 
 const getAvgExpensesByPeriod = (period: GregorianCalendar) => {
   const expenses = getTransactionsValues(getExpensesByPeriod(period))
 
-  return median(expenses)
+  return average(expenses)
 }
 
 const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
   const remains = getRemainsByPeriod(period)
 
-  return median(remains)
+  return average(remains)
 }
 
 export {

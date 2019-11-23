@@ -9,7 +9,7 @@ const sum = (numbers: number[]) => (
   )
 )
 
-const median = (numbers: number[]) => (
+const average = (numbers: number[]) => (
   numbers.length && (sum(numbers) / numbers.length)
 )
 
@@ -30,6 +30,6 @@ export {
   head,
   last,
   sum,
-  median,
+  average,
   zipWith
 }
