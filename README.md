@@ -43,6 +43,40 @@ Em seguida, importe as funções desejadas do arquivo _/src/core-js/index.ts_.
 ### Organização de Pacotes
 ![](https://img.icons8.com/dusk/64/000000/folder-tree.png)
 
+```js
+data/                      /** Módulo contendo os dados usados por toda aplicação */
+
+src/  
+  +- core-haskell/         /** Módulo contendo a estrutura e implementação do projeto haskell */
+    +- packages/           /** Módulo contendo a API para módulos externos */
+    |  +- json-parser/  
+    |    +- JsonParser.hs  /** Código responsável pelo parser dos arquivos json para um tipo haskell*/
+    +- resolvers/          /** Módulo contendo as funções responsáveis por obter os dados */
+    |  +- Queries.hs       /** Código responsável pelas funções de consulta */
+    |  +- Filters.hs       /** Código responsável pelas funções de filtragem */
+    |  +- Helpers.hs       /** Código responsável pela definição de funções auxiliares, usadas nos métodos de consulta */
+    +- tests/  
+    +- typings/            /** Módulo contendo todos os tipos da aplicação */
+    |  +- GregorianCalendar.hs  
+    |  +- Transaction.hs  
+    |  +- TransactionType.hs  
+    index.hs               /** Ponto de entrada do projeto Haskell, que possibilita o acesso aos metódos de sua API */
+
+  +- core-js               /** Módulo contendo a estrutura e implementação do projeto javascript */
+    +- resolvers/          /** Módulo contendo as funções responsáveis por obter os dados */
+    |  +- queries.ts       /** Código responsável pelas funções de consulta */
+    |  +- filters.ts       /** Código responsável pelas funções de filtragem */
+    |  +- helpers.ts       /** Código responsável pela definição de funções auxiliares, usadas nos métodos de consulta */
+    +- typings/            /** Módulo contendo todos os tipos da aplicação */
+    |  +- global.ts  
+    package.json  
+    tsconfig.json  
+    index.ts               /** Ponto de entrada do projeto JS, que possibilita o acesso aos metódos de sua API */
+    util.ts                /** Código contendo a implementação de funções utilitárias para listas e objetos*/
+
+  +- ui  
+    +- *Coming Soon*  
+```
 ### Funcionalidades
 ![](https://img.icons8.com/dusk/64/000000/api-settings.png)
 
