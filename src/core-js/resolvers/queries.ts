@@ -53,32 +53,29 @@ const getRemainByPeriod = (period: GregorianCalendar) => {
   return revenueValue - expenseValue
 }
 
-const getTotalBalanceByPeriod = (period: GregorianCalendar) => {
+const getInitialBalance = (period: GregorianCalendar) => {
   const { value } = head(filterByPeriod(period))
-  
-  return value + getRemainByPeriod(period) 
+  return value
 }
 
-const getMaxBalanceByPeriod = (period: GregorianCalendar) => {
-  const { value } = head(filterByPeriod(period))
-  const filteredTransactions = groupBy(
+const getTotalBalanceByPeriod = (period: GregorianCalendar) => {  
+  return getInitialBalance(period) + getRemainByPeriod(period) 
+}
+
+const getTransactionsByDay = (period: GregorianCalendar) => (
+  groupBy(
     concatValues,
     getDay, 
     filterByRevenueOrExpense(filterByPeriod(period))
   )
+)
 
-  return max(reduceGroups(filteredTransactions).map(cumulativeSum(value)))
+const getMaxBalanceByPeriod = (period: GregorianCalendar) => {
+  return max(reduceGroups(getTransactionsByDay(period)).map(cumulativeSum(getInitialBalance(period))))
 }
 
 const getMinBalanceByPeriod = (period: GregorianCalendar) => {
-  const { value } = head(filterByPeriod(period))
-  const filteredTransactions = groupBy(
-    concatValues,
-    getDay,
-    filterByRevenueOrExpense(filterByPeriod(period))
-  )
-
-  return min(reduceGroups(filteredTransactions).map(cumulativeSum(value)))
+  return min(reduceGroups(getTransactionsByDay(period)).map(cumulativeSum(getInitialBalance(period))))
 }
 
 const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {
@@ -104,10 +101,11 @@ const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
 }
 
 const getCashFlow = (period: GregorianCalendar) => {
-  const transactionsByDay = groupBy(concatValues, getDay, getRevenuesByPeriod(period))
+  const transactionsByDay = getTransactionsByDay(period)
+  const balances = reduceGroups(transactionsByDay).map(cumulativeSum(getInitialBalance(period)))
   const days = Object.keys(transactionsByDay)
 
-  return days.map(day => [day, sum(transactionsByDay[day])])
+  return days.map((day, i) => ({[day]: balances[i]}))
 }
 
 export {
