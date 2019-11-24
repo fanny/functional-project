@@ -27,7 +27,15 @@ $ ghci index.hs
 
 #### JavaScript
 
-Importe as funções desejadas do arquivo _/src/core-js/index.ts_.
+Para ter acesso a API de JavaScript garanta que você executou os seguintes comandos:
+
+```js
+  yarn install
+  yarn start
+```
+**Obs:** O mesmo deve ser feito, caso você deseje ter acesso a UI do projeto, nesse caso certifique de estar no pacote _/src/ui.
+
+Em seguida, importe as funções desejadas do arquivo _/src/core-js/index.ts_.
 
 ### Funcionalidades
 
