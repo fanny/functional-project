@@ -19,7 +19,8 @@ $ cabal install aeson
 ### Execução do Projeto
 
 #### Haskell
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/64px-Haskell-Logo.svg.png)  
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/64px-Haskell-Logo.svg.png)
+
 Execute na raiz do projeto haskell (_/src/core-haskell_) o seguinte comando:
 
 ```shell
@@ -43,7 +44,7 @@ Em seguida, importe as funções desejadas do arquivo _/src/core-js/index.ts_.
 ![](https://img.icons8.com/dusk/64/000000/folder-tree.png)
 
 ### Funcionalidades
-![]((https://img.icons8.com/dusk/64/000000/api-settings.png)
+![](https://img.icons8.com/dusk/64/000000/api-settings.png)
 
 As funcionalidades da aplicação são referentes ao conjunto de dados disponível no diretório _/data_.
 
