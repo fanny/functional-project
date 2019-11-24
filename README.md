@@ -5,12 +5,13 @@ Repositório referente ao projeto final da disciplina **Programação Funcional*
 O projeto se trata da implementação da [especificação](https://docs.google.com/document/d/13Jqq8MKZykaF2XrFsTUXjf350UE7eJJoS0J5Ki16zTE/edit) nas linguagens Haskell e JavaScript
 
 ### Configuração
+![](https://img.icons8.com/dusk/64/000000/settings.png)
 
-Para a execução do projeto em Haskell garanta que possui instalado em sua máquina o GHCI, compilador para Haskell, e o Cabal, para utilização de pacotes.
+Para a execução do projeto em Haskell garanta que possui instalado em sua máquina o GHCI(compilador para Haskell), e o Cabal, para utilização de pacotes.
 
 Além disso, é utilizado o Aeson como _parser_ para JSON. Sua instalação pode ser feita através dos comandos:
 
-```
+```shell
 $ cabal update
 $ cabal install aeson
 ```
@@ -18,26 +19,31 @@ $ cabal install aeson
 ### Execução do Projeto
 
 #### Haskell
-
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/64px-Haskell-Logo.svg.png)  
 Execute na raiz do projeto haskell (_/src/core-haskell_) o seguinte comando:
 
-```
+```shell
 $ ghci index.hs
 ```
 
 #### JavaScript
+![](https://img.icons8.com/color/64/000000/javascript.png)
 
-Para ter acesso a API de JavaScript garanta que você executou os seguintes comandos:
+Para ter acesso a API de JavaScript garanta que você executou os seguintes comandos, na pasta raiz do projeto JavaScript(_src/core-js_):
 
-```js
-  yarn install
-  yarn start
+```shell
+$ yarn install
+$ yarn start
 ```
 **Obs:** O mesmo deve ser feito, caso você deseje ter acesso a UI do projeto, nesse caso, certifique de estar no pacote _/src/ui_.
 
 Em seguida, importe as funções desejadas do arquivo _/src/core-js/index.ts_.
 
+### Organização de Pacotes
+![](https://img.icons8.com/dusk/64/000000/folder-tree.png)
+
 ### Funcionalidades
+![]((https://img.icons8.com/dusk/64/000000/api-settings.png)
 
 As funcionalidades da aplicação são referentes ao conjunto de dados disponível no diretório _/data_.
 
