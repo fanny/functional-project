@@ -51,7 +51,7 @@ src/
     +- packages/           /** Módulo contendo a API para módulos externos */
     |  +- json-parser/  
     |    +- JsonParser.hs  /** Código responsável pelo parser dos arquivos json para um tipo haskell*/
-    +- resolvers/          /** Módulo contendo as funções responsáveis por obter os dados */
+    +- resolvers/          /** Módulo contendo as funções responsáveis por resolver um pedido do cliente e devolver os dados */
     |  +- Queries.hs       /** Código responsável pelas funções de consulta */
     |  +- Filters.hs       /** Código responsável pelas funções de filtragem */
     |  +- Helpers.hs       /** Código responsável pela definição de funções auxiliares, usadas nos métodos de consulta */
@@ -63,7 +63,7 @@ src/
     index.hs               /** Ponto de entrada do projeto Haskell, que possibilita o acesso aos metódos de sua API */
 
   +- core-js               /** Módulo contendo a estrutura e implementação do projeto javascript */
-    +- resolvers/          /** Módulo contendo as funções responsáveis por obter os dados */
+    +- resolvers/          /** Módulo contendo as funções responsáveis por resolver um pedido do cliente e devolver os dados */
     |  +- queries.ts       /** Código responsável pelas funções de consulta */
     |  +- filters.ts       /** Código responsável pelas funções de filtragem */
     |  +- helpers.ts       /** Código responsável pela definição de funções auxiliares, usadas nos métodos de consulta */
