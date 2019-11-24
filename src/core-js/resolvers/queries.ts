@@ -71,11 +71,15 @@ const getTransactionsByDay = (period: GregorianCalendar) => (
 )
 
 const getMaxBalanceByPeriod = (period: GregorianCalendar) => {
-  return max(reduceGroups(getTransactionsByDay(period)).map(cumulativeSum(getInitialBalance(period))))
+  const dayBalances = reduceGroups(getTransactionsByDay(period))
+
+  return max(dayBalances.map(cumulativeSum(getInitialBalance(period))))
 }
 
 const getMinBalanceByPeriod = (period: GregorianCalendar) => {
-  return min(reduceGroups(getTransactionsByDay(period)).map(cumulativeSum(getInitialBalance(period))))
+  const dayBalances = reduceGroups(getTransactionsByDay(period))
+  
+  return min(dayBalances.map(cumulativeSum(getInitialBalance(period))))
 }
 
 const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {

@@ -1,10 +1,10 @@
 /*import { groupBy } from './util'
 import { Transaction } from './typings/global';*/
 import {
-  getCashFlow
+  getMaxBalanceByPeriod
 } from './resolvers/queries'
 
 
-console.log(getCashFlow({year: 2019, month: 1}))
+console.log(getMaxBalanceByPeriod({year: 2019, month: 1}))
 
 
