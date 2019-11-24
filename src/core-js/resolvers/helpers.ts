@@ -4,11 +4,11 @@
 
 import { TransactionType, Transaction } from '../typings/global'
 
-const isNotTransaction = (transactionType: string) => {
-  return (transactionType == TransactionType.SALDO_CORRENTE ||
+const isNotTransaction = (transactionType: string) => (
+  transactionType == TransactionType.SALDO_CORRENTE ||
   transactionType == TransactionType.APLICACAO || 
-  transactionType == TransactionType.VALOR_APLICACAO)
-}
+  transactionType == TransactionType.VALOR_APLICACAO
+)
 
 const isRevenue = ({ value, transactionTypes }: Transaction) => (
   value >= 0 && transactionTypes.filter(isNotTransaction).length == 0
