@@ -10,13 +10,21 @@ import { GregorianCalendar } from '../typings/global'
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
 
-  return filterByRevenue(filteredTransactions)
+  return filterByRevenue((filteredTransactions))
+}
+
+const getRevenueByPeriod = (period: GregorianCalendar) => {
+  return sum(getTransactionsValues(getRevenuesByPeriod(period)))
 }
 
 const getExpensesByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
 
   return filterByExpense(filteredTransactions)
+}
+
+const getExpenseByPeriod = (period: GregorianCalendar) => {
+  return sum(getTransactionsValues(getExpensesByPeriod(period))) * (-1)
 }
 
 const getRemainsByPeriod = (period: GregorianCalendar) => {
@@ -79,8 +87,8 @@ const getCashFlow = (period: GregorianCalendar) => {
 }
 
 export {
-  getRevenuesByPeriod,
-  getExpensesByPeriod,
+  getRevenueByPeriod,
+  getExpenseByPeriod,
   getRemainByPeriod,
   getTotalBalanceByPeriod,
   getMaxBalanceByPeriod,
