@@ -2,15 +2,34 @@
  * This code has a main purpose to serve like an API, making available all methods allowed.
 */
 
-import { filterByPeriod, filterByExpense, filterByRevenue } from './filters'
-import { getTransactionsValues, getTotal, concatValues, getDay, getMonth } from './helpers'
-import { sum, zipWith, head, average, groupBy } from '../util'
+import {
+  filterByPeriod,
+  filterByExpense,
+  filterByRevenue,
+  filterByRevenueOrExpense
+} from './filters'
+import {
+  getTransactionsValues,
+  concatValues,
+  getDay,
+  getMonth
+} from './helpers'
+import {
+  sum,
+  head,
+  average,
+  groupBy,
+  cumulativeSum,
+  min,
+  max,
+  reduceGroups
+} from '../util'
 import { GregorianCalendar } from '../typings/global'
 
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
 
-  return filterByRevenue((filteredTransactions))
+  return filterByRevenue(filteredTransactions)
 }
 
 const getRevenueByPeriod = (period: GregorianCalendar) => {
@@ -39,18 +58,28 @@ const getTotalBalanceByPeriod = (period: GregorianCalendar) => {
   
   return value + getRemainByPeriod(period) 
 }
-/*
-const getMaxBalanceByPeriod = (period: GregorianCalendar) => {
-  const sortedBalance = getTotalBalancesByPeriod(period).sort()
 
-  return last(sortedBalance)
+const getMaxBalanceByPeriod = (period: GregorianCalendar) => {
+  const { value } = head(filterByPeriod(period))
+  const filteredTransactions = groupBy(
+    concatValues,
+    getDay, 
+    filterByRevenueOrExpense(filterByPeriod(period))
+  )
+
+  return max(reduceGroups(filteredTransactions).map(cumulativeSum(value)))
 }
 
 const getMinBalanceByPeriod = (period: GregorianCalendar) => {
-  const sortedBalance = getTotalBalancesByPeriod(period).sort()
+  const { value } = head(filterByPeriod(period))
+  const filteredTransactions = groupBy(
+    concatValues,
+    getDay,
+    filterByRevenueOrExpense(filterByPeriod(period))
+  )
 
-  return head(sortedBalance)
-}*/
+  return min(reduceGroups(filteredTransactions).map(cumulativeSum(value)))
+}
 
 const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {
   const revenues = getTransactionsValues(getRevenuesByPeriod(period))
@@ -61,14 +90,17 @@ const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {
 const getAvgExpensesByPeriod = (period: GregorianCalendar) => {
   const expenses = getTransactionsValues(getExpensesByPeriod(period))
 
-  return average(expenses)
+  return average(expenses) * (-1)
 }
 
 const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
-  const revenues = groupBy(concatValues, getMonth, getRevenuesByPeriod(period))
-  const expenses = groupBy(concatValues, getMonth, getExpensesByPeriod(period))
+  const filteredTransactions = groupBy(
+    concatValues,
+    getMonth, 
+    filterByRevenueOrExpense(filterByPeriod(period))
+  )
 
-  return average(zipWith(getTotal, revenues, expenses))
+  return average(reduceGroups(filteredTransactions))
 }
 
 const getCashFlow = (period: GregorianCalendar) => {
@@ -83,6 +115,8 @@ export {
   getExpenseByPeriod,
   getRemainByPeriod,
   getTotalBalanceByPeriod,
+  getMaxBalanceByPeriod,
+  getMinBalanceByPeriod,
   getAvgRevenuesByPeriod,
   getAvgExpensesByPeriod,
   getAvgRemainsByPeriod,

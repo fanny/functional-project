@@ -22,9 +22,13 @@ const filterByRevenue = (transactions: Transaction[]) => (
 const filterByExpense = (transactions: Transaction[]) => (
   transactions.filter(isExpense)
 )
+const filterByRevenueOrExpense = (transactions: Transaction[]) => (
+  transactions.filter(isRevenue).concat(transactions.filter(isExpense))
+)
 
 export {
   filterByPeriod,
   filterByRevenue,
-  filterByExpense
+  filterByExpense,
+  filterByRevenueOrExpense
 }

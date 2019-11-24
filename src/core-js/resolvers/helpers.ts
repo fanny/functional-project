@@ -35,6 +35,7 @@ const getMonth = ({ date: { month }}: Transaction) => month
 const getDay = ({ date: { dayOfMonth }}: Transaction) => dayOfMonth
 
 export {
+  isNotTransaction,
   isRevenue,
   isExpense,
   getTransactionsValues,
