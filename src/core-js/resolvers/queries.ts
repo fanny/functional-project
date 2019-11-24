@@ -3,8 +3,8 @@
 */
 
 import { filterByPeriod, filterByExpense, filterByRevenue } from './filters'
-import { getTransactionsValues, getTotal, concatValues, getDay } from './helpers'
-import { sum, zipWith, head, last, average, groupBy } from '../util'
+import { getTransactionsValues, getTotal, concatValues, getDay, getMonth } from './helpers'
+import { sum, zipWith, head, average, groupBy } from '../util'
 import { GregorianCalendar } from '../typings/global'
 
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
@@ -34,17 +34,12 @@ const getRemainByPeriod = (period: GregorianCalendar) => {
   return revenueValue - expenseValue
 }
 
-const getTotalBalancesByPeriod = (period: GregorianCalendar) => {
-  const revenues = groupBy(concatValues, getDay, getRevenuesByPeriod(period))
-  const expenses = groupBy(concatValues, getDay, getRevenuesByPeriod(period))
-
-  return zipWith(getTotal, revenues, expenses)
-}
-
 const getTotalBalanceByPeriod = (period: GregorianCalendar) => {
-  return sum(getTotalBalancesByPeriod(period))
+  const { value } = head(filterByPeriod(period))
+  
+  return value + getRemainByPeriod(period) 
 }
-
+/*
 const getMaxBalanceByPeriod = (period: GregorianCalendar) => {
   const sortedBalance = getTotalBalancesByPeriod(period).sort()
 
@@ -55,7 +50,7 @@ const getMinBalanceByPeriod = (period: GregorianCalendar) => {
   const sortedBalance = getTotalBalancesByPeriod(period).sort()
 
   return head(sortedBalance)
-}
+}*/
 
 const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {
   const revenues = getTransactionsValues(getRevenuesByPeriod(period))
@@ -70,9 +65,10 @@ const getAvgExpensesByPeriod = (period: GregorianCalendar) => {
 }
 
 const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
-  const remains = getRemainByPeriod(period)
+  const revenues = groupBy(concatValues, getMonth, getRevenuesByPeriod(period))
+  const expenses = groupBy(concatValues, getMonth, getExpensesByPeriod(period))
 
-  return remains
+  return average(zipWith(getTotal, revenues, expenses))
 }
 
 const getCashFlow = (period: GregorianCalendar) => {
@@ -87,8 +83,6 @@ export {
   getExpenseByPeriod,
   getRemainByPeriod,
   getTotalBalanceByPeriod,
-  getMaxBalanceByPeriod,
-  getMinBalanceByPeriod,
   getAvgRevenuesByPeriod,
   getAvgExpensesByPeriod,
   getAvgRemainsByPeriod,

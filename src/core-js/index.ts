@@ -1,9 +1,9 @@
 /*import { groupBy } from './util'
 import { Transaction } from './typings/global';*/
 import {
- getRemainByPeriod,
- /*
+ 
   getTotalBalanceByPeriod,
+  /*
   getMaxBalanceByPeriod,
   getMinBalanceByPeriod,
   getAvgRevenuesByPeriod,
@@ -21,7 +21,7 @@ const a = groupBy(groupMonths, getMonth, filterByPeriod({year: 2017}))*/
 console.log(getMinBalanceByPeriod({year: 2019, month: 1}))
 console.log(getMaxBalanceByPeriod({year: 2019, month: 1}))*/
 
-console.log(getRemainByPeriod({year: 2019, month: 1}))
+console.log(getTotalBalanceByPeriod({year: 2019, month: 1}))
 /*
 console.log(getAvgRevenuesByPeriod({year: 2019}))
 console.log(getAvgExpensesByPeriod({year: 2019}))
