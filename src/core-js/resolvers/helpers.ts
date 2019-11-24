@@ -4,18 +4,18 @@
 
 import { TransactionType, Transaction } from '../typings/global'
 
-const isTransaction = (transactionType: string) => (
-  transactionType != TransactionType.SALDO_CORRENTE && 
-  transactionType != TransactionType.APLICACAO && 
-  transactionType != TransactionType.VALOR_APLICACAO
-)
+const isNotTransaction = (transactionType: string) => {
+  return (transactionType == TransactionType.SALDO_CORRENTE ||
+  transactionType == TransactionType.APLICACAO || 
+  transactionType == TransactionType.VALOR_APLICACAO)
+}
 
 const isRevenue = ({ value, transactionTypes }: Transaction) => (
-  value <= 0 && transactionTypes.filter(isTransaction)
-) 
+  value >= 0 && transactionTypes.filter(isNotTransaction).length == 0
+)
 
 const isExpense = ({ value, transactionTypes }: Transaction) => (
-  value > 0 && transactionTypes.filter(isTransaction)
+  value < 0 && transactionTypes.filter(isNotTransaction).length == 0
 )
 
 const getTransactionsValues = (transactions: Transaction[]) => (
@@ -23,7 +23,7 @@ const getTransactionsValues = (transactions: Transaction[]) => (
 )
 
 const getRemains = (revenueValue: number, expenseValue: number) => (
-  revenueValue - (expenseValue * (-1))
+  revenueValue - expenseValue
 )
 
 const getTotal = (revenueValue: number, expenseValue: number) => (
