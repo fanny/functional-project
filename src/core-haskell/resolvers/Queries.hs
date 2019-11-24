@@ -14,10 +14,7 @@ module Queries (
   getMinBalance,
   getFinalBalance,
   getDaysBalances,
-  getCashFlow,
-  testes,
-  testes2,
-  testes3
+  getCashFlow
 ) where
 
 import Filters
@@ -127,22 +124,6 @@ getMinMaxBalance' year month func = do
   transactions <- (getTransactionsByYearAndMonth year month)
   revenuesAndExpenses <- (getRevenuesAndExpenses year month)
   return (func (getDaysBalances revenuesAndExpenses (getInitialBalance transactions)))
-
-testes :: Integer -> Integer -> IO [Double ]
-testes year month = do
-  transactions <- (getTransactionsByYearAndMonth year month)
-  revenuesAndExpenses <- (getRevenuesAndExpenses year month)
-  return (getDaysBalances revenuesAndExpenses (getInitialBalance transactions))
-
-testes2 :: Integer -> Integer -> IO Double 
-testes2 year month = do
-  transactions <- (getTransactionsByYearAndMonth year month)
-  return (getInitialBalance transactions)
-
-testes3 :: Integer -> Integer -> IO [Double]
-testes3 year month = do
-  transactions <- (getExpensesByYearAndMonth year month)
-  return (getDaysRemains transactions)
 
 -- Retorna o fluxo de caixa de um ano e mês. 
 -- O fluxo de caixa é uma lista contendo pares (dia, saldoFinalDoDia).
