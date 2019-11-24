@@ -12,7 +12,7 @@ import GHC.Generics
 data Transaction = Transaction {
   date :: GregorianCalendar,
   textIdentifier :: String,
-  value :: Float,
+  value :: Double,
   description :: String,
   docID :: String,
   transactionTypes :: [TransactionType]
