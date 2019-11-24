@@ -21,29 +21,35 @@ import TransactionType
 import Data.List
 import Data.Function
 
+-- Checa o ano de uma transação.
 checkYear :: Integer -> Transaction -> Bool
-checkYear y t = year (date t) == y
+checkYear y transaction = year (date transaction) == y
 
+-- Checa o mês de uma transação.
 checkMonth :: Integer -> Transaction -> Bool
-checkMonth m t = month (date t) == m
+checkMonth m transaction = month (date transaction) == m
 
+-- Checa se uma transação é uma receita ou despesa
 isRevenueOrExpense :: Transaction -> Bool
-isRevenueOrExpense t = ([VALOR_APLICACAO, APLICACAO, SALDO_CORRENTE] `intersect` (transactionTypes t)) == []
+isRevenueOrExpense transaction = ([VALOR_APLICACAO, APLICACAO, SALDO_CORRENTE] `intersect` (transactionTypes transaction)) == []
 
+-- Checa se uma transação é uma receita
 isRevenue :: Transaction -> Bool
-isRevenue t = (value t) >= 0 && (isRevenueOrExpense t)
+isRevenue transaction = (value transaction) >= 0 && (isRevenueOrExpense transaction)
 
+-- Checa se uma transação é uma despesa
 isExpense :: Transaction -> Bool
-isExpense t = (value t) < 0 && (isRevenueOrExpense t)
+isExpense transaction = (value transaction) < 0 && (isRevenueOrExpense transaction)
 
+-- Calcula a média para uma lista de valores.
 mean :: [Double] -> Double
 mean values = sum (values) / fromIntegral (length values)
 
--- Agrupa a lista de transações por dia.
+-- Agrupa uma lista de transações por dia.
 groupTransactionsByDay :: [Transaction] -> [[Transaction]]
 groupTransactionsByDay transactions = (groupBy ((==) `on` getDay) transactions)
 
--- Agrupa a lista de transações por mês.
+-- Agrupa uma lista de transações por mês.
 groupTransactionsByMonth :: [Transaction] -> [[Transaction]]
 groupTransactionsByMonth transactions = (groupBy ((==) `on` getMonth) transactions)
 
@@ -72,6 +78,6 @@ getInitialBalance transactions = value (transactions !! 0)
 getDay :: Transaction -> Integer
 getDay t = dayOfMonth (date t)
 
--- Retorn o mês de uma transação
+-- Retorna o mês de uma transação
 getMonth :: Transaction -> Integer
 getMonth t = month (date t)
