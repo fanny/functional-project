@@ -33,7 +33,7 @@ Para ter acesso a API de JavaScript garanta que você executou os seguintes coma
   yarn install
   yarn start
 ```
-**Obs:** O mesmo deve ser feito, caso você deseje ter acesso a UI do projeto, nesse caso certifique de estar no pacote _/src/ui.
+**Obs:** O mesmo deve ser feito, caso você deseje ter acesso a UI do projeto, nesse caso, certifique de estar no pacote _/src/ui_.
 
 Em seguida, importe as funções desejadas do arquivo _/src/core-js/index.ts_.
 
