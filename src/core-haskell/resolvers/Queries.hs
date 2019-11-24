@@ -57,26 +57,26 @@ getExpensesByYear year = do
 -- Retorna as receitas pelo ano e mês.
 getRevenuesByYearAndMonth :: Integer -> Integer -> IO [Transaction]
 getRevenuesByYearAndMonth year month = do
-  transactions <- (getRevenuesByYear year)
-  return (filterByMonth month transactions)
+  revenues <- (getRevenuesByYear year)
+  return (filterByMonth month revenues)
   
 -- Retorna as despesas pelo ano e mês.
 getExpensesByYearAndMonth :: Integer -> Integer -> IO [Transaction]
 getExpensesByYearAndMonth year month = do
-  transactions <- (getExpensesByYear year)
-  return (filterByMonth month transactions)
+  expenses <- (getExpensesByYear year)
+  return (filterByMonth month expenses)
 
 -- Retorna o valor total das receitas de um ano e mês.
 getRevenueValue :: Integer -> Integer -> IO Double
 getRevenueValue year month = do
-  transactions <- (getRevenuesByYearAndMonth year month)
-  return (sum (map (value) transactions))
+  revenues <- (getRevenuesByYearAndMonth year month)
+  return (sum (map (value) revenues))
 
 -- Retorna o valor total das despesas de um ano e mês.
 getExpenseValue :: Integer -> Integer -> IO Double
 getExpenseValue year month = do
-  transactions <- (getExpensesByYearAndMonth year month)
-  return ((sum (map (value) transactions)) * (-1))
+  expenses <- (getExpensesByYearAndMonth year month)
+  return ((sum (map (value) expenses)) * (-1))
 
 -- Retorna a sobra de um ano e mês.
 getRemainsValue :: Integer -> Integer -> IO Double
