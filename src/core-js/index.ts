@@ -9,8 +9,8 @@ import {
    getAvgRevenuesByPeriod,
    getAvgExpensesByPeriod,
    getAvgRemainsByPeriod,
+   getCashFlow
  } from './resolvers/queries'
- 
  
  export {
    filterByPeriod,
@@ -22,5 +22,6 @@ import {
    getMinBalanceByPeriod,
    getAvgRevenuesByPeriod,
    getAvgExpensesByPeriod,
-   getAvgRemainsByPeriod
+   getAvgRemainsByPeriod,
+   getCashFlow
  }
