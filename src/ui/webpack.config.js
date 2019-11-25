@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: __dirname + '/public',
     publicPath: '/',
@@ -12,10 +12,19 @@ module.exports = {
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: "ts-loader" }
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
+      }
     ]
   },
   devServer: {
     contentBase: './public'
+  },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
   }
 };
