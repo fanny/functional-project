@@ -1,22 +1,25 @@
 {
   "compilerOptions": {
+    "outDir": "/public",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "jsx": "react",
     "lib": ["es2017", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": false,
     "target": "es2017",
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
+    "esModuleInterop": true,
     "noUnusedParameters": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true
+    "resolveJsonModule": true
   },
-  "typeAcquisition": {
-    "enable": false
-  },
-  "include": ["./**/*"],
-  "exclude": ["node_modules", "*.md"]
+  "include": [
+    "./typings/*.d.ts",
+    "./**/*.tsx",
+    "./**/*.ts"
+  ],
 }
+

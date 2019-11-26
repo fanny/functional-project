@@ -25,6 +25,7 @@ import {
   reduceGroups
 } from '../util'
 import { GregorianCalendar } from '../typings/global'
+import transactions from '../../../data/transactions.json'
 
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
@@ -32,8 +33,12 @@ const getRevenuesByPeriod = (period: GregorianCalendar) => {
   return filterByRevenue(filteredTransactions)
 }
 
+const getRevenuesValues = (period: GregorianCalendar) => {
+  return getTransactionsValues(getRevenuesByPeriod(period))
+}
+
 const getRevenueByPeriod = (period: GregorianCalendar) => {
-  return sum(getTransactionsValues(getRevenuesByPeriod(period)))
+  return sum(getRevenuesValues(period))
 }
 
 const getExpensesByPeriod = (period: GregorianCalendar) => {
@@ -42,8 +47,12 @@ const getExpensesByPeriod = (period: GregorianCalendar) => {
   return filterByExpense(filteredTransactions)
 }
 
+const getExpensesValues = (period: GregorianCalendar) => {
+  return getTransactionsValues(getExpensesByPeriod(period))
+}
+
 const getExpenseByPeriod = (period: GregorianCalendar) => {
-  return sum(getTransactionsValues(getExpensesByPeriod(period))) *(-1)
+  return sum(getExpensesValues(period))*(-1)
 }
 
 const getRemainByPeriod = (period: GregorianCalendar) => {
@@ -83,13 +92,13 @@ const getMinBalanceByPeriod = (period: GregorianCalendar) => {
 }
 
 const getAvgRevenuesByPeriod = (period: GregorianCalendar) => {
-  const revenues = getTransactionsValues(getRevenuesByPeriod(period))
+  const revenues = getRevenuesValues((period))
 
   return average(revenues)
 }
 
 const getAvgExpensesByPeriod = (period: GregorianCalendar) => {
-  const expenses = getTransactionsValues(getExpensesByPeriod(period))
+  const expenses = getExpensesValues((period))
 
   return average(expenses) * (-1)
 }
@@ -112,6 +121,13 @@ const getCashFlow = (period: GregorianCalendar) => {
   return days.map((day, i) => ({[day]: balances[i]}))
 }
 
+const getYears = () => (
+  new Set(transactions.map(transaction => transaction.date.year))
+)
+const getMonths = () => (
+  new Set(transactions.map(transaction => transaction.date.month))
+)
+
 export {
   getRevenueByPeriod,
   getExpenseByPeriod,
@@ -123,5 +139,7 @@ export {
   getAvgExpensesByPeriod,
   getAvgRemainsByPeriod,
   getCashFlow,
-  filterByPeriod
+  filterByPeriod,
+  getYears,
+  getMonths
 }
