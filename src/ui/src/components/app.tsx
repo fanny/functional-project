@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from  './SummarizingCard/index'
 import Select from  './Select/index'
+import Table from  './Table/index'
 import {
     getRevenueByPeriod,
     getExpenseByPeriod,
@@ -11,6 +12,7 @@ import {
     getAvgExpensesByPeriod,
     getAvgRevenuesByPeriod,
     getAvgRemainsByPeriod,
+    getCashFlow,
     getYears,
     getMonths
 } from '../data-fetcher/queries'
@@ -53,6 +55,7 @@ const App = () => {
             min={getMinBalanceByPeriod({year: year, month: month})}
             max={getMaxBalanceByPeriod({year: year, month: month})}
         />
+        <Table rows={getCashFlow({year: year, month: month})}/>
     </div>
    )
 }
