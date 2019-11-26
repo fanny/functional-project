@@ -32,6 +32,13 @@ const CustomSelect:FC<Props> = ({ title, options, value, handleChange}) => {
               id="demo-simple-select"
               value={value}
               onChange={handleChange}
+              MenuProps={{
+                getContentAnchorEl: null,
+                anchorOrigin: {
+                  vertical: "bottom",
+                  horizontal: "left"
+                }
+              }}
             >
              {Array.from(options).map(option => <MenuItem value={option}>{option}</MenuItem>)}
             </Select>

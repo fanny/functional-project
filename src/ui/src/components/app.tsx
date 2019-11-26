@@ -16,6 +16,7 @@ import {
     getYears,
     getMonths
 } from '../data-fetcher/queries'
+import Box from '@material-ui/core/Box';
 
 
 const years = getYears()
@@ -34,8 +35,10 @@ const App = () => {
 
     return (
       <div>
+        <Box display="flex" flexDirection="row" justifyContent="flex-end">
         <Select title='year' options={years} value={year} handleChange={handleChangeYear}/>
         <Select title='month' options={months} value={month} handleChange={handleChangeMonth}/>
+        </Box>
         <Card
             metric='Revenue'
             value={getRevenueByPeriod({year: year, month: month})}
