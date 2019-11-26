@@ -1,0 +1,313 @@
+[
+  {
+    "date": {
+      "year": 2018,
+      "month": 0,
+      "dayOfMonth": 1,
+      "hourOfDay": 0,
+      "minute": 0,
+      "second": 0
+    },
+    "textIdentifier": "Saldo Corrente",
+    "value": 43980.15,
+    "description": "Saldo inicial do mes",
+    "docID": "00000000",
+    "isClassified": true,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS",
+      "SALDO_CORRENTE"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2018,
+      "month": 0,
+      "dayOfMonth": 1,
+      "hourOfDay": 0,
+      "minute": 0,
+      "second": 0
+    },
+    "textIdentifier": "RDC - Longo CDI",
+    "value": 2602.34,
+    "description": "value aplicacao no mes",
+    "docID": "11111111",
+    "isClassified": true,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS",
+      "VALOR_APLICACAO"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2018,
+      "month": 0,
+      "dayOfMonth": 2,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 21
+    },
+    "textIdentifier": "CHEQUE PAGO CAIXA",
+    "value": -2260.0,
+    "description": "",
+    "docID": "002.782",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTROS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2018,
+      "month": 0,
+      "dayOfMonth": 2,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 21
+    },
+    "textIdentifier": "CRED LIQ COB",
+    "value": 92.45,
+    "description": "CRED TIT INEXISTENTE NN 4219-8",
+    "docID": "42198",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2018,
+      "month": 4,
+      "dayOfMonth": 1,
+      "hourOfDay": 0,
+      "minute": 0,
+      "second": 0
+    },
+    "textIdentifier": "Saldo Corrente",
+    "value": 57143.13,
+    "description": "Saldo inicial do mes",
+    "docID": "00000000",
+    "isClassified": true,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS",
+      "SALDO_CORRENTE"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2018,
+      "month": 4,
+      "dayOfMonth": 1,
+      "hourOfDay": 0,
+      "minute": 0,
+      "second": 0
+    },
+    "textIdentifier": "RDC - Longo CDI",
+    "value": 2654.38,
+    "description": "value aplicacao no mes",
+    "docID": "11111111",
+    "isClassified": true,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS",
+      "VALOR_APLICACAO"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2018,
+      "month": 4,
+      "dayOfMonth": 4,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 21
+    },
+    "textIdentifier": "CHEQUE PAGO CAIXA",
+    "value": -250.0,
+    "description": "",
+    "docID": "002.980",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTROS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2018,
+      "month": 4,
+      "dayOfMonth": 4,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 21
+    },
+    "textIdentifier": "CRÉD.LIQ.COBRANÇA",
+    "value": 929.44,
+    "description": "",
+    "docID": "0000052244",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 0,
+      "dayOfMonth": 1,
+      "hourOfDay": 0,
+      "minute": 0,
+      "second": 0
+    },
+    "textIdentifier": "Saldo Corrente",
+    "value": 131301.66,
+    "description": "Saldo inicial do mes",
+    "docID": "00000000",
+    "isClassified": true,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS",
+      "SALDO_CORRENTE"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 0,
+      "dayOfMonth": 1,
+      "hourOfDay": 0,
+      "minute": 0,
+      "second": 0
+    },
+    "textIdentifier": "RDC - Longo CDI",
+    "value": 2758.12,
+    "description": "value aplicacao no mes",
+    "docID": "11111111",
+    "isClassified": true,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS",
+      "VALOR_APLICACAO"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 0,
+      "dayOfMonth": 2,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 21
+    },
+    "textIdentifier": "CHEQUE PAGO CAIXA",
+    "value": -500.0,
+    "description": "",
+    "docID": "003.390",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTROS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 0,
+      "dayOfMonth": 3,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 21
+    },
+    "textIdentifier": "CRÉD.LIQ.COBRANÇA",
+    "value": 4407.76,
+    "description": "",
+    "docID": "0000035123",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "dayOfMonth": 1,
+      "hourOfDay": 0,
+      "minute": 0,
+      "second": 0
+    },
+    "textIdentifier": "Saldo Corrente",
+    "value": 163797.14,
+    "description": "Saldo inicial do mes",
+    "docID": "00000000",
+    "isClassified": true,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS",
+      "SALDO_CORRENTE"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "dayOfMonth": 1,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 22
+    },
+    "textIdentifier": "CH COOP/AG.DEP.CTA",
+    "value": -10000.0,
+    "description": "",
+    "docID": "003.539",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTROS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "dayOfMonth": 8,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 22
+    },
+    "textIdentifier": "CRÉD.LIQ.COBRANÇA",
+    "value": 479.04,
+    "description": "",
+    "docID": "0000068846",
+    "isClassified": false,
+    "transactionTypes": [
+      "OUTRAS_RECEITAS"
+    ],
+    "files": []
+  },
+  {
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "dayOfMonth": 15,
+      "hourOfDay": 8,
+      "minute": 15,
+      "second": 22
+    },
+    "textIdentifier": "APLICAÇÃO RDC",
+    "value": -2428.6,
+    "description": "",
+    "docID": "41 - 2",
+    "isClassified": true,
+    "transactionTypes": [
+      "APLICACAO"
+    ],
+    "files": []
+  }
+]
