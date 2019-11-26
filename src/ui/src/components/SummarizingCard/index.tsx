@@ -15,8 +15,10 @@ type Props = {
 
 const useStyles = makeStyles({
     card: {
-      width: 275,
-      margin: '30px',
+      width: 295,
+      margin: '10px',
+      display: 'inline-block',
+      minHeight: 185,
     },
     bullet: {
       display: 'inline-block',
@@ -44,24 +46,24 @@ const SummarizingCard:FC<Props> = ({
     return (
       <Card className={classes.card}>
       <CardContent>
-        <Typography variant="h6" component="h2">
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
           {metric}
         </Typography>
         <Typography className={classes.pos} variant='h3'>
           {numAbbr.abbreviate(value,2)}
         </Typography>
         {avg && (
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2"  color="textSecondary"gutterBottom>
             {`Avg: ${numAbbr.abbreviate(avg, 2)}`}
           </Typography>
         )}
         {min && (
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" color="textSecondary" gutterBottom>
             {`Min: ${numAbbr.abbreviate(min, 2)}`}
           </Typography>
         )}
         {max && (
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" color="textSecondary" gutterBottom>
             {`Max: ${numAbbr.abbreviate(max,2)}`}
           </Typography> 
         )}

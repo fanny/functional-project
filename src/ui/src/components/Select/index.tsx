@@ -17,19 +17,16 @@ const useStyles = makeStyles((theme: Theme) =>
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
+    }
   }),
 );
 
 const CustomSelect:FC<Props> = ({ title, options, value, handleChange}) => {
     const classes = useStyles({})
     return (
-        <div>
-          <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">{title}</InputLabel>
+        <div dir="rtl">
+          <FormControl className={classes.formControl} >
+            <InputLabel id="demo-simple-select-label" htmlFor="grouped-select">{title}</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"

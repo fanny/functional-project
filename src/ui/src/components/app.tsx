@@ -17,8 +17,10 @@ import {
     getMonths
 } from '../data-fetcher/queries'
 
+
 const years = getYears()
 const months = getMonths()
+
 const App = () => {
     const [year, setYear] = React.useState(2019);
     const handleChangeYear = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -56,6 +58,7 @@ const App = () => {
             max={getMaxBalanceByPeriod({year: year, month: month})}
         />
         <Table rows={getCashFlow({year: year, month: month})}/>
+
     </div>
    )
 }

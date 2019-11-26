@@ -9,8 +9,8 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   root: {
-    width: '40%',
-    height: '60%',
+    width: '100%',
+    height: '100%',
     overflowX: 'auto',
   },
   table: {
@@ -32,17 +32,17 @@ const SimpleTable:FC<Props> = ({rows}) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Day</TableCell>
-            <TableCell>Balance</TableCell>
+            <TableCell align="center">Day</TableCell>
+            <TableCell align="center">Balance</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
         {rows.map((row, i) => (
             <TableRow key={`${i}`}>
-              <TableCell component="th" scope="row">
+              <TableCell align="center" component="th" scope="row">
                 {Object.keys(row)[0]}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell align="center"  component="th" scope="row">
                 {Object.values(row)[0]}
               </TableCell>
             </TableRow>
