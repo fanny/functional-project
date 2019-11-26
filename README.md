@@ -9,14 +9,14 @@ O projeto se trata da implementação da [especificação](https://docs.google.c
 
 Para a execução do projeto em Haskell garanta que possui instalado em sua máquina o GHCI(compilador para Haskell), e o Cabal, para utilização de pacotes.
 
-O Aeson como _parser_ para JSON. Sua instalação pode ser feita através dos comandos:
+O projeto utiliza Aeson como _parser_ para JSON. Sua instalação pode ser feita através dos comandos:
 
 ```shell
 $ cabal update
 $ cabal install aeson
 ```
 
-Além disso, para os testes é utilizado o HUnit, caso não tenha instalado, execute o comando abaixo:
+Além disso, para os testes é utilizado o HUnit, caso não o tenha instalado, execute o comando abaixo:
 
 ```shell
 $ cabal install HUnit
