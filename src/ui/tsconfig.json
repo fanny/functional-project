@@ -10,10 +10,11 @@
     "sourceMap": false,
     "target": "es2017",
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "esModuleInterop": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./typings/*.d.ts",
