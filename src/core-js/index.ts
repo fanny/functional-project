@@ -9,7 +9,9 @@ import {
    getAvgRevenuesByPeriod,
    getAvgExpensesByPeriod,
    getAvgRemainsByPeriod,
-   getCashFlow
+   getCashFlow,
+   getYears,
+   getMonths
  } from './resolvers/queries'
  
  export {
@@ -23,5 +25,7 @@ import {
    getAvgRevenuesByPeriod,
    getAvgExpensesByPeriod,
    getAvgRemainsByPeriod,
-   getCashFlow
+   getCashFlow,
+   getYears,
+   getMonths
  }

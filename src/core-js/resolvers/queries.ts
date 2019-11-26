@@ -25,6 +25,7 @@ import {
   reduceGroups
 } from '../util'
 import { GregorianCalendar } from '../typings/global'
+import transactions from '../../../data/transactions.json'
 
 const getRevenuesByPeriod = (period: GregorianCalendar) => {
   const filteredTransactions = filterByPeriod(period)
@@ -120,6 +121,13 @@ const getCashFlow = (period: GregorianCalendar) => {
   return days.map((day, i) => ({[day]: balances[i]}))
 }
 
+const getYears = () => (
+  new Set(transactions.map(transaction => transaction.date.year))
+)
+const getMonths = () => (
+  new Set(transactions.map(transaction => transaction.date.month))
+)
+
 export {
   getRevenueByPeriod,
   getExpenseByPeriod,
@@ -131,5 +139,7 @@ export {
   getAvgExpensesByPeriod,
   getAvgRemainsByPeriod,
   getCashFlow,
-  filterByPeriod
+  filterByPeriod,
+  getYears,
+  getMonths
 }
