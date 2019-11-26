@@ -29,15 +29,15 @@ checkYear y transaction = year (date transaction) == y
 checkMonth :: Integer -> Transaction -> Bool
 checkMonth m transaction = month (date transaction) == m
 
--- Checa se uma transação é uma receita ou despesa
+-- Checa se uma transação é uma receita ou despesa.
 isRevenueOrExpense :: Transaction -> Bool
 isRevenueOrExpense transaction = ([VALOR_APLICACAO, APLICACAO, SALDO_CORRENTE] `intersect` (transactionTypes transaction)) == []
 
--- Checa se uma transação é uma receita
+-- Checa se uma transação é uma receita.
 isRevenue :: Transaction -> Bool
 isRevenue transaction = (value transaction) >= 0 && (isRevenueOrExpense transaction)
 
--- Checa se uma transação é uma despesa
+-- Checa se uma transação é uma despesa.
 isExpense :: Transaction -> Bool
 isExpense transaction = (value transaction) < 0 && (isRevenueOrExpense transaction)
 
@@ -45,13 +45,17 @@ isExpense transaction = (value transaction) < 0 && (isRevenueOrExpense transacti
 mean :: [Double] -> Double
 mean values = sum (values) / fromIntegral (length values)
 
+-- Agrupa uma lista de transações.
+groupTransactions :: [Transaction] -> (Transaction -> Integer) -> [[Transaction]]
+groupTransactions transactions func = (groupBy ((==) `on` func) transactions)
+
 -- Agrupa uma lista de transações por dia.
 groupTransactionsByDay :: [Transaction] -> [[Transaction]]
-groupTransactionsByDay transactions = (groupBy ((==) `on` getDay) transactions)
+groupTransactionsByDay transactions = groupTransactions transactions getDay
 
 -- Agrupa uma lista de transações por mês.
 groupTransactionsByMonth :: [Transaction] -> [[Transaction]]
-groupTransactionsByMonth transactions = (groupBy ((==) `on` getMonth) transactions)
+groupTransactionsByMonth transactions = groupTransactions transactions getMonth
 
 -- Retorna uma lista contendo a sobra para cada dia da lista de transações.
 getDaysRemains :: [Transaction] -> [Double]
@@ -78,6 +82,6 @@ getInitialBalance transactions = value (transactions !! 0)
 getDay :: Transaction -> Integer
 getDay t = dayOfMonth (date t)
 
--- Retorna o mês de uma transação
+-- Retorna o mês de uma transação.
 getMonth :: Transaction -> Integer
 getMonth t = month (date t)

@@ -25,117 +25,101 @@ import GregorianCalendar
 import Data.List
 
 -- Retorna as transações pelo ano.
-getTransactionsByYear :: Integer -> IO [Transaction]
-getTransactionsByYear year = do
-  transactions <- getTransactions
-  return (filterByYear year transactions)
+getTransactionsByYear :: [Transaction] -> Integer -> [Transaction]
+getTransactionsByYear db year = filterByYear year db
 
 -- Retorna as transações pelo ano e mês.
-getTransactionsByYearAndMonth :: Integer -> Integer -> IO [Transaction]
-getTransactionsByYearAndMonth year month = do
-  transactions <- getTransactions
-  return (filterByYearAndMonth year month transactions)
+getTransactionsByYearAndMonth :: [Transaction] -> Integer -> Integer -> [Transaction]
+getTransactionsByYearAndMonth db year month = filterByYearAndMonth year month db
 
 -- Retorna as receitas e despesas pelo ano e mês.
-getRevenuesAndExpenses :: Integer -> Integer -> IO [Transaction]
-getRevenuesAndExpenses year month = do
-  transactions <- (getTransactionsByYearAndMonth year month)
-  return (filterByRevenueAndExpense transactions)
+getRevenuesAndExpenses :: [Transaction] -> Integer -> Integer -> [Transaction]
+getRevenuesAndExpenses db year month = filterByRevenueAndExpense transactions
+  where transactions = getTransactionsByYearAndMonth db year month
 
 -- Retorna as receitas pelo ano.
-getRevenuesByYear :: Integer -> IO [Transaction]
-getRevenuesByYear year = do
-  transactions <- (getTransactionsByYear year)
-  return (filterByRevenue transactions)
+getRevenuesByYear :: [Transaction] -> Integer -> [Transaction]
+getRevenuesByYear db year = filterByRevenue transactions
+  where transactions = getTransactionsByYear db year
 
 -- Retorna as despesas pelo ano.
-getExpensesByYear :: Integer -> IO [Transaction]
-getExpensesByYear year = do
-  transactions <- (getTransactionsByYear year)
-  return (filterByExpense transactions)
+getExpensesByYear :: [Transaction] -> Integer -> [Transaction]
+getExpensesByYear db year = filterByExpense transactions
+  where transactions = getTransactionsByYear db year
 
 -- Retorna as receitas pelo ano e mês.
-getRevenuesByYearAndMonth :: Integer -> Integer -> IO [Transaction]
-getRevenuesByYearAndMonth year month = do
-  revenues <- (getRevenuesByYear year)
-  return (filterByMonth month revenues)
+getRevenuesByYearAndMonth :: [Transaction] -> Integer -> Integer -> [Transaction]
+getRevenuesByYearAndMonth db year month = filterByMonth month revenues
+  where revenues = getRevenuesByYear db year
   
 -- Retorna as despesas pelo ano e mês.
-getExpensesByYearAndMonth :: Integer -> Integer -> IO [Transaction]
-getExpensesByYearAndMonth year month = do
-  expenses <- (getExpensesByYear year)
-  return (filterByMonth month expenses)
+getExpensesByYearAndMonth :: [Transaction] -> Integer -> Integer -> [Transaction]
+getExpensesByYearAndMonth db year month = filterByMonth month expenses
+  where expenses = getExpensesByYear db year
 
 -- Retorna o valor total das receitas de um ano e mês.
-getRevenueValue :: Integer -> Integer -> IO Double
-getRevenueValue year month = do
-  revenues <- (getRevenuesByYearAndMonth year month)
-  return (sum (map (value) revenues))
+getRevenueValue :: [Transaction] -> Integer -> Integer -> Double
+getRevenueValue db year month = sum (map (value) revenues)
+  where revenues = getRevenuesByYearAndMonth db year month
 
 -- Retorna o valor total das despesas de um ano e mês.
-getExpenseValue :: Integer -> Integer -> IO Double
-getExpenseValue year month = do
-  expenses <- (getExpensesByYearAndMonth year month)
-  return ((sum (map (value) expenses)) * (-1))
+getExpenseValue :: [Transaction] -> Integer -> Integer -> Double
+getExpenseValue db year month = (sum (map (value) expenses)) * (-1)
+  where expenses = getExpensesByYearAndMonth db year month
 
 -- Retorna a sobra de um ano e mês.
-getRemainsValue :: Integer -> Integer -> IO Double
-getRemainsValue year month = do
-  revenueValue <- (getRevenueValue year month)
-  expenseValue <- (getExpenseValue year month)
-  return (revenueValue - expenseValue)
-
+getRemainsValue :: [Transaction] -> Integer -> Integer -> Double
+getRemainsValue db year month = revenueValue - expenseValue
+  where
+    revenueValue = getRevenueValue db year month
+    expenseValue = getExpenseValue db year month
+  
 -- Retorna a média das receitas de um ano.
-getAvgRevenues :: Integer -> IO Double
-getAvgRevenues year = do
-  revenues <- (getRevenuesByYear year)
-  return (mean (map (value) revenues))
+getAvgRevenues :: [Transaction] -> Integer -> Double
+getAvgRevenues db year = mean (map (value) revenues)
+  where revenues = getRevenuesByYear db year
 
 -- Retorna a média das despesas de um ano.
-getAvgExpenses :: Integer -> IO Double
-getAvgExpenses year = do
-  expenses <- (getExpensesByYear year)
-  return ((mean (map (value) expenses)) * (-1))
+getAvgExpenses :: [Transaction] -> Integer -> Double
+getAvgExpenses db year = (mean (map (value) expenses)) * (-1)
+  where expenses = getExpensesByYear db year
 
 -- Retorna a média das sobras de um ano.
-getAvgRemains ::Integer -> IO Double
-getAvgRemains year = do
-  transactions <- (getTransactionsByYear year)
-  return (mean (getMonthsRemains (filterByRevenueAndExpense transactions)))
-
+getAvgRemains :: [Transaction] -> Integer -> Double
+getAvgRemains db year = mean (getMonthsRemains (filterByRevenueAndExpense transactions))
+  where transactions = getTransactionsByYear db year
+  
 -- Retorna o saldo final de um ano e mês.
-getFinalBalance :: Integer -> Integer -> IO Double
-getFinalBalance year month = do
-  transactions <- (getTransactionsByYearAndMonth year month)
-  remainer <- (getRemainsValue year month)
-  return ((value (transactions !! 0)) + remainer)
+getFinalBalance :: [Transaction] -> Integer -> Integer -> Double
+getFinalBalance db year month = (value (transactions !! 0)) + remainer
+  where 
+    transactions = getTransactionsByYearAndMonth db year month
+    remainer = getRemainsValue db year month
 
 -- Retorna o maior saldo de um ano e mês.
-getMaxBalance :: Integer -> Integer -> IO Double
-getMaxBalance year month = getMinMaxBalance' year month maximum
+getMaxBalance :: [Transaction] -> Integer -> Integer -> Double
+getMaxBalance db year month = getMinMaxBalance' db year month maximum
 
 -- Retorna o menor saldo de um ano e mês.
-getMinBalance :: Integer -> Integer -> IO Double 
-getMinBalance year month = getMinMaxBalance' year month minimum
+getMinBalance :: [Transaction] -> Integer -> Integer -> Double 
+getMinBalance db year month = getMinMaxBalance' db year month minimum
 
 -- Retorna o maior ou menor saldo de um ano e mês.
-getMinMaxBalance' :: Integer -> Integer -> ([Double] -> Double) -> IO Double 
-getMinMaxBalance' year month func = do
-  transactions <- (getTransactionsByYearAndMonth year month)
-  revenuesAndExpenses <- (getRevenuesAndExpenses year month)
-  return (func (getDaysBalances revenuesAndExpenses (getInitialBalance transactions)))
+getMinMaxBalance' :: [Transaction] -> Integer -> Integer -> ([Double] -> Double) -> Double 
+getMinMaxBalance' db year month func = func (getDaysBalances revenuesAndExpenses (getInitialBalance transactions))
+  where 
+    transactions = getTransactionsByYearAndMonth db year month
+    revenuesAndExpenses = getRevenuesAndExpenses db year month
 
 -- Retorna o fluxo de caixa de um ano e mês. 
 -- O fluxo de caixa é uma lista contendo pares (dia, saldoFinalDoDia).
-getCashFlow :: Integer -> Integer -> IO [(Integer, Double)]
-getCashFlow year month = do
-  transactions <- (getTransactionsByYearAndMonth year month)
-  revenuesAndExpenses <- (getRevenuesAndExpenses year month)
-  return (snd (mapAccumL (getCashFlow') (getInitialBalance transactions) (groupTransactionsByDay revenuesAndExpenses)))
+getCashFlow :: [Transaction] -> Integer -> Integer -> [(Integer, Double)]
+getCashFlow db year month = snd (mapAccumL (getCashFlow') (getInitialBalance transactions) (groupTransactionsByDay revenuesAndExpenses))
+  where
+    transactions = getTransactionsByYearAndMonth db year month
+    revenuesAndExpenses = getRevenuesAndExpenses db year month
 
 -- Função auxiliar para a função getCashFlow.
 getCashFlow' :: Double -> [Transaction] -> (Double, (Integer, Double))
 getCashFlow' balance transactions = (newBalance, (getDay (transactions !! 0), newBalance))
   where newBalance = (getRemains transactions) + balance
-
-  
