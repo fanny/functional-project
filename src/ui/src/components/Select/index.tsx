@@ -5,6 +5,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+type Props = {
+    title: string,
+    options: Set<number>,
+    value: number,
+    handleChange: any,
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
@@ -17,25 +24,19 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const CustomSelect:FC = () => {
+const CustomSelect:FC<Props> = ({ title, options, value, handleChange}) => {
     const classes = useStyles({})
-    const [age, setAge] = React.useState('');
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setAge(event.target.value as string);
-    };
     return (
         <div>
           <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">{title}</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={age}
+              value={value}
               onChange={handleChange}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+             {Array.from(options).map(option => <MenuItem value={option}>{option}</MenuItem>)}
             </Select>
           </FormControl>
           </div>

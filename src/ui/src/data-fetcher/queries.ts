@@ -9,6 +9,8 @@ import {
   getAvgRevenuesByPeriod,
   getAvgExpensesByPeriod,
   getAvgRemainsByPeriod,
+  getYears,
+  getMonths
 } from '../../../core-js'
 
 
@@ -22,5 +24,7 @@ export {
   getMinBalanceByPeriod,
   getAvgRevenuesByPeriod,
   getAvgExpensesByPeriod,
-  getAvgRemainsByPeriod
+  getAvgRemainsByPeriod,
+  getYears,
+  getMonths
 }
