@@ -33,7 +33,7 @@ Para ter acesso às funções implementadas, execute na raiz do projeto Haskell 
 $ ghci index.hs
 ```
 
-Feito isso, os métodos estão disponíveis para uso. Exemplo:
+Feito isso, as funções estão disponíveis para uso. Exemplo:
 
 ```shell
 $ db <- getTransactions       /** Carrega as transações */
