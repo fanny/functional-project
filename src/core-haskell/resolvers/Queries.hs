@@ -14,9 +14,7 @@ module Queries (
   getMinBalance,
   getFinalBalance,
   getDaysBalances,
-  getCashFlow,
-  getMinBalance',
-  getMaxBalance'
+  getCashFlow
 ) where
 
 import Filters
@@ -98,20 +96,20 @@ getFinalBalance db year month = (getInitialBalance transactions) + remainer
     transactions = getTransactionsByYearAndMonth db year month
     remainer = getRemainsValue db year month
 
--- Retorna o maior saldo de um ano e mês.
-getMaxBalance :: [Transaction] -> Integer -> Integer -> Double
-getMaxBalance db year month = getMinMaxBalance' db year month maximum
-
--- Retorna o menor saldo de um ano e mês.
-getMinBalance :: [Transaction] -> Integer -> Integer -> Double 
+-- Retorna o saldo mínimo de um ano e mês.
+getMinBalance :: [Transaction] -> Integer -> Integer -> Double
 getMinBalance db year month = getMinMaxBalance' db year month minimum
 
--- Retorna o maior ou menor saldo de um ano e mês.
+-- Retorna o saldo máximo de um ano e mês.
+getMaxBalance :: [Transaction] -> Integer -> Integer -> Double
+getMaxBalance db year month = getMinMaxBalance' db year month maximum
+  
+-- Função auxiliar para cálculo do saldo máximo e mínimo de um ano e mês.
 getMinMaxBalance' :: [Transaction] -> Integer -> Integer -> ([Double] -> Double) -> Double
-getMinMaxBalance' db year month func = func (getDaysBalances revenuesAndExpenses (getInitialBalance transactions))
-  where 
+getMinMaxBalance' db year month func = func (snd (mapAccumL (\x y -> (x + (value y), x + (value y))) 0 revenuesAndExpenses))
+  where
     transactions = getTransactionsByYearAndMonth db year month
-    revenuesAndExpenses = getRevenuesAndExpenses db year month
+    revenuesAndExpenses =  [transactions !! 0] ++ (getRevenuesAndExpenses db year month)
 
 -- Retorna o fluxo de caixa de um ano e mês. 
 -- O fluxo de caixa é uma lista contendo pares (dia, saldoFinalDoDia).
@@ -125,15 +123,3 @@ getCashFlow db year month = snd (mapAccumL (getCashFlow') 0 (groupTransactionsBy
 getCashFlow' :: Double -> [Transaction] -> (Double, (Integer, Double))
 getCashFlow' balance transactions = (newBalance, (getDay (transactions !! 0), newBalance))
   where newBalance = (getRemains transactions) + balance
-
-getMinBalance' :: [Transaction] -> Integer -> Integer -> Double
-getMinBalance' db year month = getMinMaxBalance'' db year month minimum
-
-getMaxBalance' :: [Transaction] -> Integer -> Integer -> Double
-getMaxBalance' db year month = getMinMaxBalance'' db year month maximum
-
-getMinMaxBalance'' :: [Transaction] -> Integer -> Integer -> ([Double] -> Double) -> Double
-getMinMaxBalance'' db year month func = func (snd (mapAccumL (\x y -> (x + (value y), x + (value y))) 0 revenuesAndExpenses))
-  where
-    transactions = getTransactionsByYearAndMonth db year month
-    revenuesAndExpenses =  [transactions !! 0] ++ (getRevenuesAndExpenses db year month)
