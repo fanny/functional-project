@@ -64,7 +64,7 @@ getRevenueValue db year month = sum (map (value) revenues)
 
 -- Retorna o valor total das despesas de um ano e mês.
 getExpenseValue :: [Transaction] -> Integer -> Integer -> Double
-getExpenseValue db year month = (sum (map (value) expenses)) * (-1)
+getExpenseValue db year month = abs(sum (map (value) expenses))
   where expenses = getExpensesByYearAndMonth db year month
 
 -- Retorna a sobra de um ano e mês.
@@ -81,7 +81,7 @@ getAvgRevenues db year = mean (map (value) revenues)
 
 -- Retorna a média das despesas de um ano.
 getAvgExpenses :: [Transaction] -> Integer -> Double
-getAvgExpenses db year = (mean (map (value) expenses)) * (-1)
+getAvgExpenses db year = abs(mean (map (value) expenses))
   where expenses = getExpensesByYear db year
 
 -- Retorna a média das sobras de um ano.
@@ -91,8 +91,8 @@ getAvgRemains db year = mean (getMonthsRemains (filterByRevenueAndExpense transa
   
 -- Retorna o saldo final de um ano e mês.
 getFinalBalance :: [Transaction] -> Integer -> Integer -> Double
-getFinalBalance db year month = (value (transactions !! 0)) + remainer
-  where 
+getFinalBalance db year month = (getInitialBalance transactions) + remainer
+  where
     transactions = getTransactionsByYearAndMonth db year month
     remainer = getRemainsValue db year month
 

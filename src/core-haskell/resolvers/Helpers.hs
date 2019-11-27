@@ -43,6 +43,7 @@ isExpense transaction = (value transaction) < 0 && (isRevenueOrExpense transacti
 
 -- Calcula a média para uma lista de valores.
 mean :: [Double] -> Double
+mean [] = 0
 mean values = sum (values) / fromIntegral (length values)
 
 -- Agrupa uma lista de transações.
@@ -76,6 +77,7 @@ getDaysBalances revenuesAndExpenses initialBalance =
 
 -- Retorna o saldo inicial de uma lista de transaçãoes.
 getInitialBalance :: [Transaction] -> Double
+getInitialBalance [] = 0
 getInitialBalance transactions = value (transactions !! 0)
 
 -- Retorna o dia do mês de uma transação.
