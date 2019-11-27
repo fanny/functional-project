@@ -1,9 +1,9 @@
-import React, {FC} from 'react'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import React, { FC } from 'react'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
 
 type Props = {
     title: string,
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CustomSelect:FC<Props> = ({ title, options, value, handleChange}) => {
     const classes = useStyles({})
+
     return (
         <div dir="rtl">
           <FormControl className={classes.formControl} >
@@ -40,10 +41,12 @@ const CustomSelect:FC<Props> = ({ title, options, value, handleChange}) => {
                 }
               }}
             >
-             {Array.from(options).map(option => <MenuItem value={option}>{option}</MenuItem>)}
-            </Select>
-          </FormControl>
-          </div>
+            {Array.from(options).map(
+              option => <MenuItem value={option}>{option}</MenuItem>
+            )}
+          </Select>
+        </FormControl>
+      </div>
     )   
 }
 

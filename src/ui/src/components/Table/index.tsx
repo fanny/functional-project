@@ -1,11 +1,11 @@
-import React, {FC} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React, { FC } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +24,7 @@ type Props = {
 }
 
 const SimpleTable:FC<Props> = ({rows}) => {
-  const classes = useStyles({});
+  const classes = useStyles({})
 
   return (
     <Paper className={classes.root}>
@@ -49,7 +49,7 @@ const SimpleTable:FC<Props> = ({rows}) => {
         </TableBody>
       </Table>
     </Paper>
-  );
+  )
 }
 
 export default SimpleTable

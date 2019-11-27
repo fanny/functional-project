@@ -2,9 +2,9 @@
  * This code has a main purpose to export all filter functions.
 */
 
-import {isRevenue, isExpense} from './helpers'
+import { isRevenue, isExpense } from './helpers'
+import { GregorianCalendar, Transaction } from '../typings/global'
 import transactions from '../../../data/transactions.json'
-import {GregorianCalendar, Transaction} from '../typings/global'
 
 const filterByPeriod = ({year, month}: GregorianCalendar) => {
   const pass = true
