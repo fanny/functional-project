@@ -1,10 +1,10 @@
-## Projeto Final da Disciplina Programação Funcional
+# Projeto Final da Disciplina Programação Funcional
 
 Repositório referente ao projeto final da disciplina **Programação Funcional** 2019.2.
 
 O projeto se trata da implementação da [especificação](https://docs.google.com/document/d/13Jqq8MKZykaF2XrFsTUXjf350UE7eJJoS0J5Ki16zTE/edit) nas linguagens Haskell e JavaScript
 
-### Configuração
+## Configuração
 ![](https://img.icons8.com/dusk/64/000000/settings.png)
 
 Para a execução do projeto em Haskell garanta que possui instalado em sua máquina o GHCI(compilador para Haskell), e o Cabal, para utilização de pacotes.
@@ -22,33 +22,47 @@ Além disso, para os testes é utilizado o HUnit, caso não o tenha instalado, e
 $ cabal install HUnit
 ```
 
-### Execução do Projeto
+## Execução do Projeto
 
-#### Haskell
+### Haskell
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/64px-Haskell-Logo.svg.png)
 
-Execute na raiz do projeto haskell (_/src/core-haskell_) o seguinte comando:
+Para ter acesso às funções implementadas, execute na raiz do projeto Haskell (_src/core-haskell_) o comando:
 
 ```shell
 $ ghci index.hs
 ```
 
-Tendo executado o projeto, utilize a função `runTests` para executar os testes.
+A execução dos testes pode ser feita através da função `runTests`.
 
-#### JavaScript
+### JavaScript
 ![](https://img.icons8.com/color/64/000000/javascript.png)
 
-Para ter acesso a API de JavaScript garanta que você executou os seguintes comandos, na pasta raiz do projeto JavaScript(_src/core-js_):
+Para ter acesso a API de JavaScript, garanta que você executou na pasta raiz do projeto JavaScript (_src/core-js_) os comandos:
 
 ```shell
 $ yarn install
 $ yarn start
 ```
-**Obs:** O mesmo deve ser feito, caso você deseje ter acesso a UI do projeto, nesse caso, certifique de estar no pacote _/src/ui_.
 
-Em seguida, importe as funções desejadas do arquivo _/src/core-js/index.ts_.
+Feito isso, importe as funções desejadas do arquivo _/src/core-js/index.ts_.
 
-### Organização de Pacotes
+#### Execução da interface web
+
+Para a executar a UI certifique-se de estar no pacote _/src/ui_, em seguida, execute os comandos:
+
+```shell
+$ yarn install
+$ yarn start
+```
+
+Feito isso, a aplicação estará disponível no endereço http://localhost:8080.
+
+<p align="center">
+  <img width="500" src="https://i.imgur.com/s2ra8Hd.png">
+</p>
+
+## Organização de Pacotes
 ![](https://img.icons8.com/dusk/64/000000/folder-tree.png)
 
 ```js
@@ -63,7 +77,13 @@ src/
     |  +- Queries.hs       /** Código responsável pelas funções de consulta */
     |  +- Filters.hs       /** Código responsável pelas funções de filtragem */
     |  +- Helpers.hs       /** Código responsável pela definição de funções auxiliares, usadas nos métodos de consulta */
-    +- tests/  
+    +- tests/              /** Módulo contendo os testes das funcionalidades do projeto */
+    |  +- TestAverages.hs
+    |  +- TestBalances.hs
+    |  +- TestCashFlows.hs
+    |  +- TestFilters.hs
+    |  +- Tests.hs
+    |  +- TestValues.hs
     +- typings/            /** Módulo contendo todos os tipos da aplicação */
     |  +- GregorianCalendar.hs  
     |  +- Transaction.hs  
@@ -85,12 +105,12 @@ src/
   +- ui  
     +- *Coming Soon*  
 ```
-### Funcionalidades
+## Funcionalidades
 ![](https://img.icons8.com/dusk/64/000000/api-settings.png)
 
 As funcionalidades da aplicação são referentes ao conjunto de dados disponível no diretório _/data_.
 
-Consultas, funções e operações disponíveis:
+**Consultas, funções e operações disponíveis:**
 
 * [x] Filtrar transações por ano.
 * [x] Filtrar transações por ano e mês.
@@ -103,4 +123,4 @@ Consultas, funções e operações disponíveis:
 * [X] Calcular a média das receitas em determinado ano
 * [X] Calcular a média das despesas em determinado ano
 * [x] Calcular a média das sobras em determinado ano
-* [x] Retornar o fluxo de caixa de determinado mês/ano. O fluxo de caixa nada mais é do que uma lista contendo pares (dia,saldoFinalDoDia). 
+* [x] Retornar o fluxo de caixa de determinado mês/ano. O fluxo de caixa nada mais é do que uma lista contendo pares (dia,saldoFinalDoDia).
