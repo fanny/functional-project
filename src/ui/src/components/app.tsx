@@ -39,6 +39,7 @@ const App = () => {
         <Select title='year' options={years} value={year} handleChange={handleChangeYear}/>
         <Select title='month' options={months} value={month} handleChange={handleChangeMonth}/>
         </Box>
+        <Box display="flex" flexDirection="row" justifyContent="center">
         <Card
             metric='Revenue'
             value={getRevenueByPeriod({year: year, month: month})}
@@ -60,7 +61,10 @@ const App = () => {
             min={getMinBalanceByPeriod({year: year, month: month})}
             max={getMaxBalanceByPeriod({year: year, month: month})}
         />
+        </Box>
+        <Box display="flex" flexDirection="row" justifyContent="center">
         <Table rows={getCashFlow({year: year, month: month})}/>
+        </Box>
 
     </div>
    )

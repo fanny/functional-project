@@ -19,6 +19,9 @@ const useStyles = makeStyles({
       margin: '10px',
       display: 'inline-block',
       minHeight: 185,
+      justifySelf: 'center',
+      alignSelf: 'center',
+      textAlign: 'center'
     },
     bullet: {
       display: 'inline-block',
