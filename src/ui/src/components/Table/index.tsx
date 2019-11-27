@@ -9,9 +9,10 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
-    height: '100%',
+    width: '50%',
+    height: '50%',
     overflowX: 'auto',
+    marginTop: 30
   },
   table: {
     minWidth: 350,
@@ -24,9 +25,7 @@ type Props = {
 
 const SimpleTable:FC<Props> = ({rows}) => {
   const classes = useStyles({});
-  const keys = Array.from(new Set(Object.keys(rows)))
-  console.log(keys)
-  console.log(rows)
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
