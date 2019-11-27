@@ -33,6 +33,13 @@ Para ter acesso às funções implementadas, execute na raiz do projeto Haskell 
 $ ghci index.hs
 ```
 
+Feito isso, as funções estão disponíveis para uso. Exemplo:
+
+```shell
+$ db <- getTransactions       /** Carrega as transações */
+$ getMaxBalance db 2019 2
+```
+
 A execução dos testes pode ser feita através da função `runTests`.
 
 ### JavaScript
