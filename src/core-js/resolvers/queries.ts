@@ -114,7 +114,11 @@ const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
 }
 
 const getCashFlow = (period: GregorianCalendar) => {
-  const transactionsByDay = getTransactionsByDay(period)
+  const transactionsByDay = groupBy(
+    concatValues,
+    getDay, 
+    filterByPeriod(period)
+  )
   const balances = reduceGroups(transactionsByDay).map(cumulativeSum(getInitialBalance(period)))
   const days = Object.keys(transactionsByDay)
 
