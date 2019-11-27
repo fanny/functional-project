@@ -34,7 +34,7 @@ const App = () => {
     };
 
     return (
-      <div>
+      <div style={{backgroundColor: '#eeeeee'}}>
         <Box display="flex" flexDirection="row" justifyContent="flex-end">
         <Select title='year' options={years} value={year} handleChange={handleChangeYear}/>
         <Select title='month' options={months} value={month} handleChange={handleChangeMonth}/>

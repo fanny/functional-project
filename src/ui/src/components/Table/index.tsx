@@ -25,9 +25,7 @@ type Props = {
 
 const SimpleTable:FC<Props> = ({rows}) => {
   const classes = useStyles({});
-  const keys = Array.from(new Set(Object.keys(rows)))
-  console.log(keys)
-  console.log(rows)
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
