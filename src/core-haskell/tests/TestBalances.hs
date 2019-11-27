@@ -14,6 +14,7 @@ testFinalBalance = TestCase (
       assertEqual "Calcula o saldo final em Maio de 2018" 57822.57 (getFinalBalance db 2018 4)
       assertEqual "Calcula o saldo final em Janeiro de 2019" 135209.42 (getFinalBalance db 2019 0)
       assertEqual "Calcula o saldo final em Abril de 2019" 154276.18000000002 (getFinalBalance db 2019 3)
+      assertEqual "Calcula o saldo final em Abril de 2015" 0 (getFinalBalance db 2015 3)
     )
 
 -- Testes referentes ao cálculo do saldo máximo em um determinado mês e ano.
