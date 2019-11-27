@@ -66,7 +66,7 @@ $ yarn start
 Feito isso, a aplicação estará disponível no endereço http://localhost:8080.
 
 <p align="center">
-  <img width="500" src="https://i.imgur.com/s2ra8Hd.png">
+  <img width="500" src="https://i.ibb.co/tK5Q7S8/Captura-de-tela-de-2019-11-27-12-55-16.png" alt="Captura-de-tela-de-2019-11-27-12-55-16" border="0">
 </p>
 
 ## Organização de Pacotes

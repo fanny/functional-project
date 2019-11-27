@@ -1,7 +1,6 @@
 /**
  * This code has a main purpose to serve like an API, making available all methods allowed.
 */
-
 import {
   filterByPeriod,
   filterByExpense,
@@ -114,8 +113,14 @@ const getAvgRemainsByPeriod = (period: GregorianCalendar) => {
 }
 
 const getCashFlow = (period: GregorianCalendar) => {
-  const transactionsByDay = getTransactionsByDay(period)
-  const balances = reduceGroups(transactionsByDay).map(cumulativeSum(getInitialBalance(period)))
+  const transactionsByDay = groupBy(
+    concatValues,
+    getDay, 
+    filterByPeriod(period)
+  )
+  const balances = reduceGroups(transactionsByDay).map(
+    cumulativeSum(getInitialBalance(period))
+  )
   const days = Object.keys(transactionsByDay)
 
   return days.map((day, i) => ({[day]: balances[i]}))

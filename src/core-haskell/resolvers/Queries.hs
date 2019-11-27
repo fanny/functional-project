@@ -106,7 +106,7 @@ getMinBalance db year month = getMinMaxBalance' db year month minimum
 
 -- Retorna o maior ou menor saldo de um ano e mês.
 getMinMaxBalance' :: [Transaction] -> Integer -> Integer -> ([Double] -> Double) -> Double 
-getMinMaxBalance' db year month func = func (getDaysBalances revenuesAndExpenses (getInitialBalance transactions))
+getMinMaxBalance' db year month func = func (getDaysBalances revenuesAndExpenses (value (transactions !! 0)))
   where 
     transactions = getTransactionsByYearAndMonth db year month
     revenuesAndExpenses = getRevenuesAndExpenses db year month
@@ -114,10 +114,10 @@ getMinMaxBalance' db year month func = func (getDaysBalances revenuesAndExpenses
 -- Retorna o fluxo de caixa de um ano e mês. 
 -- O fluxo de caixa é uma lista contendo pares (dia, saldoFinalDoDia).
 getCashFlow :: [Transaction] -> Integer -> Integer -> [(Integer, Double)]
-getCashFlow db year month = snd (mapAccumL (getCashFlow') (getInitialBalance transactions) (groupTransactionsByDay revenuesAndExpenses))
+getCashFlow db year month = snd (mapAccumL (getCashFlow') 0 (groupTransactionsByDay revenuesAndExpenses))
   where
     transactions = getTransactionsByYearAndMonth db year month
-    revenuesAndExpenses = getRevenuesAndExpenses db year month
+    revenuesAndExpenses =  [transactions !! 0] ++ (getRevenuesAndExpenses db year month)
 
 -- Função auxiliar para a função getCashFlow.
 getCashFlow' :: Double -> [Transaction] -> (Double, (Integer, Double))
