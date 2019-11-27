@@ -31,7 +31,9 @@ const getTotal = (revenueValue: number, expenseValue: number) => (
 )
 
 const concatValues = (acc:any, { value }:Transaction) => acc.concat(value)
+
 const getMonth = ({ date: { month }}: Transaction) => month
+
 const getDay = ({ date: { dayOfMonth }}: Transaction) => dayOfMonth
 
 export {
